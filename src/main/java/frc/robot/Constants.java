@@ -15,6 +15,42 @@ package frc.robot;
  * <p>It is advised to statically import this class (or one of its inner classes) wherever the
  * constants are needed, to reduce verbosity.
  */
-public final class Constants {
+public interface Constants {
+
+    public interface USB {
+        int DRIVER_GAMEPAD = 0;
+        int CO_DRIVER_GAMEPAD = 1;
+        
+    }
+    public interface AXES {
+        int AXES_GAUCHE = 1;
+        int AXES_DROITE = 5;
+
+    }
+    public interface PWN {
+        
+        
+    }
+    public interface CAN {
+        int MOTEUR_AVANT_DROIT = 0;
+        int MOTEUR_AVANT_GAUCHE = 0;
+        int MOTEUR_ARRIERE_DROIT = 0;
+        int MOTEUR_ARRIERE_GAUCHE = 0;
+        int GOBEUR = 0;
+        int MOTEUR_CANON_HAUT = 0;
+        int MOTEUR_CANON_BAS =0;
+        
+    }
+    public interface DIO {
+        int CAPTEUR = 0;
+        
+    }
+    public interface ANALOG {
     
+        
+    }
+    public interface RELAY {
+    
+        
+    }
 }
