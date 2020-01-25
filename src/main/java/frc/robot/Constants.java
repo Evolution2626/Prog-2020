@@ -37,8 +37,8 @@ public interface Constants {
         int MOTEUR_ARRIERE_DROIT = 0;
         int MOTEUR_ARRIERE_GAUCHE = 0;
         int GOBEUR = 0;
-        int MOTEUR_CANON_HAUT = 0;
-        int MOTEUR_CANON_BAS =0;
+        int MOTEUR_LANCEUR_HAUT = 0;
+        int MOTEUR_LANCEUR_BAS =0;
         
     }
     public interface DIO {

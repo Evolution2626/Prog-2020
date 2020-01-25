@@ -24,8 +24,8 @@ public class Lanceur extends SubsystemBase {
   
 
   public Lanceur() {
-    lanceurHaut = new VictorSPX(Constants.CAN.MOTEUR_CANON_HAUT);
-    lanceurBas = new VictorSPX(Constants.CAN.MOTEUR_CANON_BAS);
+    lanceurHaut = new VictorSPX(Constants.CAN.MOTEUR_LANCEUR_HAUT);
+    lanceurBas = new VictorSPX(Constants.CAN.MOTEUR_LANCEUR_BAS);
     capteur = new DigitalInput(Constants.DIO.CAPTEUR);
 
   }
