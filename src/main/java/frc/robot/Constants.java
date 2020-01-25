@@ -28,7 +28,7 @@ public interface Constants {
 
     }
     public interface PWN {
-        
+        int MOTEUR_FEEDER = 4;
         
     }
     public interface CAN {
@@ -42,7 +42,12 @@ public interface Constants {
         
     }
     public interface DIO {
-        int CAPTEUR = 0;
+        int CAPTEUR_UN = 0;
+        int CAPTEUR_DEUX = 1;
+        int CAPTEUR_TROIS = 2;
+        int CAPTEUR_QUATRE = 3;
+        int CAPTEUR_CINQ = 4;
+        int CAPTEUR_REST = 5;
         
     }
     public interface ANALOG {

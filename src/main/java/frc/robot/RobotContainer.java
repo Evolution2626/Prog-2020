@@ -11,13 +11,19 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.ActiverLanceurCommand;
+import frc.robot.commands.ChargerCommand;
 import frc.robot.commands.DrivetrainDriveCommand;
 import frc.robot.commands.GobeurCommand;
-import frc.robot.commands.LanceurCommand;
+import frc.robot.commands.MonterPourTirerCommand;
+import frc.robot.commands.TournerFeederCommand;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Feeder;
 import frc.robot.subsystems.Gobeur;
 import frc.robot.subsystems.Lanceur;
+import frc.util.DigitalInputButton;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -33,6 +39,8 @@ public class RobotContainer {
   private final Gobeur gobeur = new Gobeur();
 
   private final Lanceur lanceur = new Lanceur();
+
+  private final Feeder feeder = new Feeder();
 
   private final XboxController driverController = new XboxController(Constants.USB.DRIVER_GAMEPAD);
 
@@ -55,8 +63,12 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     new JoystickButton(coDriverController, Button.kBumperRight.value).whileHeld(new GobeurCommand(gobeur, .6));
-    new JoystickButton(coDriverController, Button.kA.value).whileHeld(new LanceurCommand(lanceur, .5));
-  }
+    new JoystickButton(coDriverController, Button.kA.value).whileHeld(new ActiverLanceurCommand(lanceur, .5));
+    new JoystickButton(coDriverController, Button.kB.value).whenPressed(new MonterPourTirerCommand(feeder));
+    new JoystickButton(coDriverController, Button.kStart.value).whileHeld(new ParallelCommandGroup(new ActiverLanceurCommand(lanceur, .5), new TournerFeederCommand(feeder)));
+    new DigitalInputButton(feeder.getCapteurRest()).whenPressed(new ChargerCommand(feeder));
+
+    }
 
 
   /**

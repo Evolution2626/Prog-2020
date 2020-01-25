@@ -8,37 +8,34 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Lanceur;
+import frc.robot.subsystems.Feeder;
 
-public class LanceurCommand extends CommandBase {
+public class TournerFeederCommand extends CommandBase {
   /**
-   * Creates a new LanceurCommand.
+   * Creates a new TournerFeeder.
    */
-  private Lanceur lanceur;
-  private double speed;
-
-  public LanceurCommand(Lanceur lanceur, double speed) {
+  private Feeder feeder;
+  public TournerFeederCommand(Feeder feeder){
     // Use addRequirements() here to declare subsystem dependencies.
-    this.lanceur = lanceur;
-    this.speed = speed;
-    addRequirements(lanceur);
+    this.feeder = feeder;
+    addRequirements(feeder);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    lanceur.setSpeed(speed);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    feeder.enableFeeder(true);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    lanceur.setSpeed(0);
+    feeder.enableFeeder(false);
   }
 
   // Returns true when the command should end.
