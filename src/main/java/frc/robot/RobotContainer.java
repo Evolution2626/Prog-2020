@@ -65,7 +65,7 @@ public class RobotContainer {
     new JoystickButton(coDriverController, Button.kBumperRight.value).whileHeld(new GobeurCommand(gobeur, .6));
     new JoystickButton(coDriverController, Button.kA.value).whileHeld(new ActiverLanceurCommand(lanceur, .5));
     new JoystickButton(coDriverController, Button.kB.value).whenPressed(new MonterPourTirerCommand(feeder));
-    new JoystickButton(coDriverController, Button.kStart.value).whileHeld(new ParallelCommandGroup(new ActiverLanceurCommand(lanceur, .5), new TournerFeederCommand(feeder)));
+    new JoystickButton(coDriverController, Button.kStart.value).whileHeld(new ParallelCommandGroup(new ActiverLanceurCommand(lanceur, Constants.SPEED.LANCEUR_SPEED), new TournerFeederCommand(feeder)));
     new DigitalInputButton(feeder.getCapteurRest()).whenPressed(new ChargerCommand(feeder));
 
     }

@@ -40,7 +40,7 @@ public class Feeder extends SubsystemBase {
 
   public void enableFeeder(boolean enable){
     if (enable) {
-      setSpeed(.2);
+      setSpeed(Constants.SPEED.FEEDER_SPEED);
     }else {
       setSpeed(0);
     }

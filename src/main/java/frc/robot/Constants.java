@@ -58,4 +58,9 @@ public interface Constants {
     
         
     }
+
+    public interface SPEED {
+        double FEEDER_SPEED = .2;
+        double LANCEUR_SPEED = .5;
+    }
 }
