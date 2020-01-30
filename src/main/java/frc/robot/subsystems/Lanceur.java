@@ -10,6 +10,9 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Relay;
+import edu.wpi.first.wpilibj.Relay.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -19,12 +22,17 @@ public class Lanceur extends SubsystemBase {
    */
   public VictorSPX lanceurHaut;
   public VictorSPX lanceurBas;
+  public boolean lanceurEnable;
+  public boolean actuatorEnable;
+  public Relay actuator;
+  public DigitalInput capteur;
   
 
   public Lanceur() {
     lanceurHaut = new VictorSPX(Constants.CAN.MOTEUR_LANCEUR_HAUT);
     lanceurBas = new VictorSPX(Constants.CAN.MOTEUR_LANCEUR_BAS);
-    
+    actuator = new Relay(Constants.RELAY.ACTUATOR);
+    capteur = new DigitalInput(Constants.DIO.CAPTEUR_LANCEUR);
 
   }
   public void setSpeed(double speed){
@@ -32,7 +40,29 @@ public class Lanceur extends SubsystemBase {
     lanceurHaut.set(ControlMode.PercentOutput, -speed);
   }
   
+  public void setActuator(Value value){
+    actuator.set(value);
+  }
 
+  public void enableLanceur(boolean enable){
+    lanceurEnable = enable;
+  }
+
+  public boolean getLanceurEnable(){
+    return lanceurEnable;
+  }
+
+  public void enableActuator(boolean enable){
+    actuatorEnable = enable;
+  }
+
+  public boolean getActuatorEnable(){
+    return actuatorEnable;
+  }
+
+  public boolean getCapteurLanceurValue(){
+    return capteur.get();
+  }
 
   @Override
   public void periodic() {

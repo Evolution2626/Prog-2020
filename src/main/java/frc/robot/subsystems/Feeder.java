@@ -7,8 +7,10 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -16,14 +18,14 @@ public class Feeder extends SubsystemBase {
   /**
    * Creates a new Feeder.
    */
-  private VictorSP feeder;
+  private VictorSPX feeder;
   private DigitalInput[] capteurs = new DigitalInput[5];
   private DigitalInput capteurRest;
 
 
 
   public Feeder() {
-    feeder = new VictorSP(Constants.PWN.MOTEUR_FEEDER);
+    feeder = new VictorSPX(Constants.CAN.MOTEUR_FEEDER);
 
     capteurs[0] = new DigitalInput(Constants.DIO.CAPTEUR_UN);
     capteurs[1] = new DigitalInput(Constants.DIO.CAPTEUR_DEUX);
@@ -35,7 +37,7 @@ public class Feeder extends SubsystemBase {
   }
 
   public void setSpeed(double speed){
-    feeder.set(speed);
+    feeder.set(ControlMode.PercentOutput, speed);
   }
 
   public void enableFeeder(boolean enable){

@@ -13,10 +13,10 @@ import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.ActiverLanceurCommand;
 import frc.robot.commands.ChargerCommand;
 import frc.robot.commands.DrivetrainDriveCommand;
 import frc.robot.commands.GobeurCommand;
+import frc.robot.commands.LanceurCommand;
 import frc.robot.commands.MonterPourTirerCommand;
 import frc.robot.commands.TournerFeederCommand;
 import frc.robot.subsystems.Drivetrain;
@@ -62,10 +62,12 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    new JoystickButton(coDriverController, Button.kBumperRight.value).whileHeld(new GobeurCommand(gobeur, .6));
-    new JoystickButton(coDriverController, Button.kA.value).whileHeld(new ActiverLanceurCommand(lanceur, .5));
+    new JoystickButton(coDriverController, Button.kBumperRight.value).whileHeld(new GobeurCommand(gobeur, Constants.SPEED.GOBEUR_SPEED));
+    new JoystickButton(coDriverController, Button.kBumperLeft.value).whileHeld(new GobeurCommand(gobeur, -Constants.SPEED.GOBEUR_SPEED));
+    new JoystickButton(coDriverController, Button.kA.value).whileHeld(new LanceurCommand(lanceur, Constants.SPEED.LANCEUR_SPEED));
+    new JoystickButton(coDriverController, Button.kX.value).whileHeld(new LanceurCommand(lanceur, .75));
     new JoystickButton(coDriverController, Button.kB.value).whenPressed(new MonterPourTirerCommand(feeder));
-    new JoystickButton(coDriverController, Button.kStart.value).whileHeld(new ParallelCommandGroup(new ActiverLanceurCommand(lanceur, Constants.SPEED.LANCEUR_SPEED), new TournerFeederCommand(feeder)));
+    new JoystickButton(coDriverController, Button.kStart.value).whileHeld(new ParallelCommandGroup(new LanceurCommand(lanceur, Constants.SPEED.LANCEUR_SPEED), new TournerFeederCommand(feeder)));
     new DigitalInputButton(feeder.getCapteurRest()).whenPressed(new ChargerCommand(feeder));
 
     }

@@ -28,7 +28,6 @@ public interface Constants {
 
     }
     public interface PWN {
-        int MOTEUR_FEEDER = 4;
         
     }
     public interface CAN {
@@ -39,6 +38,10 @@ public interface Constants {
         int GOBEUR = 0;
         int MOTEUR_LANCEUR_HAUT = 0;
         int MOTEUR_LANCEUR_BAS =0;
+        int MOTEUR_FEEDER = 0;
+        int MOTEUR_LEVER_GOBEUR = 0;
+        int MOTEUR_GRIMPEUR_WINCH = 0;
+        int MOTEUR_GRIMPEUR = 0;
         
     }
     public interface DIO {
@@ -48,6 +51,7 @@ public interface Constants {
         int CAPTEUR_QUATRE = 3;
         int CAPTEUR_CINQ = 4;
         int CAPTEUR_REST = 5;
+        int CAPTEUR_LANCEUR = 6;
         
     }
     public interface ANALOG {
@@ -55,12 +59,13 @@ public interface Constants {
         
     }
     public interface RELAY {
-    
+        int ACTUATOR = 0;
         
     }
 
     public interface SPEED {
         double FEEDER_SPEED = .2;
         double LANCEUR_SPEED = .5;
+        double GOBEUR_SPEED = .6;
     }
 }
