@@ -31,10 +31,10 @@ public interface Constants {
         
     }
     public interface CAN {
-        int MOTEUR_AVANT_DROIT = 0;
-        int MOTEUR_AVANT_GAUCHE = 0;
-        int MOTEUR_ARRIERE_DROIT = 0;
-        int MOTEUR_ARRIERE_GAUCHE = 0;
+        int MOTEUR_AVANT_DROIT = 1;
+        int MOTEUR_AVANT_GAUCHE = 3;
+        int MOTEUR_ARRIERE_DROIT = 2;
+        int MOTEUR_ARRIERE_GAUCHE = 4;
         int GOBEUR = 0;
         int MOTEUR_LANCEUR_HAUT = 0;
         int MOTEUR_LANCEUR_BAS =0;

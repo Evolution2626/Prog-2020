@@ -9,9 +9,11 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.RobotState;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Drivetrain;
+import frc.util.MathHelper;
 import frc.util.Range;
 
 public class DrivetrainDriveCommand extends CommandBase {
@@ -37,8 +39,19 @@ public class DrivetrainDriveCommand extends CommandBase {
   @Override
   public void execute() {
     if(RobotState.isOperatorControl()){
-      drivetrain.driveTank(Range.threshold(.1, controller.getRawAxis(Constants.AXES.AXES_GAUCHE)), Range.threshold(.1, controller.getRawAxis(Constants.AXES.AXES_DROITE)));
+      double speedDroit = controller.getRawAxis(Constants.AXES.AXES_DROITE);
+      speedDroit = Range.threshold(.1, speedDroit);
+      speedDroit = Math.pow(speedDroit, 3);
+      double speedGauche = controller.getRawAxis(Constants.AXES.AXES_GAUCHE);
+      speedGauche = Range.threshold(.1, speedGauche);
+      speedGauche = Math.pow(speedGauche, 3);
+      if (!drivetrain.getSlowMode() || controller.getBumper(Hand.kRight)) {
+        drivetrain.driveTank(speedGauche, speedDroit);
+      }else {
+        drivetrain.driveTank(speedGauche * .5, speedDroit * .5);
+      }
     }
+
   }
 
   // Called once the command ends or is interrupted.

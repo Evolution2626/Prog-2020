@@ -23,6 +23,7 @@ public class Drivetrain extends SubsystemBase {
   private CANSparkMax avantGauche;
   private CANSparkMax arriereDroit;
   private CANSparkMax arriereGauche;
+  public boolean slowMode = false;
 
   public Drivetrain() {
 
@@ -42,11 +43,16 @@ public class Drivetrain extends SubsystemBase {
     arriereGauche.setClosedLoopRampRate(.1);
 
     avantDroit.setInverted(false);
-    avantGauche.setInverted(false);
+    avantGauche.setInverted(true);
     arriereDroit.setInverted(false);
-    arriereGauche.setInverted(false);
+    arriereGauche.setInverted(true);
 
-    setAllCurrentLimit(55, 20);
+    avantDroit.clearFaults();
+    avantGauche.clearFaults();
+    arriereDroit.clearFaults();
+    arriereGauche.clearFaults();
+
+    setAllCurrentLimit(20, 15);
   }
 
   public void setAllCurrentLimit(int stall, int free){
@@ -61,6 +67,16 @@ public class Drivetrain extends SubsystemBase {
     avantGauche.set(gauche);
     arriereDroit.set(droite);
     arriereGauche.set(gauche);
+  }
+
+  
+
+  public void setSlowMode(boolean state){
+    slowMode = state;
+  }
+
+  public boolean getSlowMode(){
+    return slowMode;
   }
 
   @Override
