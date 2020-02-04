@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ActiverDesactiverLanceurCommand;
 import frc.robot.commands.ActiverDesactiverSlowModeCommand;
@@ -55,6 +54,7 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
     drivetrain.setDefaultCommand(new DrivetrainDriveCommand(drivetrain, driverController));
+    lanceur.setDefaultCommand(new LanceurCommand(lanceur));
   }
 
   /**
