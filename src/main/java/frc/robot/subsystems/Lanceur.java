@@ -11,6 +11,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -28,8 +29,8 @@ public class Lanceur extends SubsystemBase {
     lanceurHaut = new VictorSPX(Constants.CAN.MOTEUR_LANCEUR_HAUT);
     lanceurBas = new VictorSPX(Constants.CAN.MOTEUR_LANCEUR_BAS);
     capteur = new DigitalInput(Constants.DIO.CAPTEUR_LANCEUR);
-
   }
+
   public void setSpeed(double speed){
     lanceurBas.set(ControlMode.PercentOutput, speed);
     lanceurHaut.set(ControlMode.PercentOutput, -speed);
