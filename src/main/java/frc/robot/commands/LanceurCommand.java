@@ -7,7 +7,6 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Relay.Value;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Lanceur;
@@ -32,11 +31,6 @@ public class LanceurCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(lanceur.getActuatorEnable() && lanceur.getCapteurLanceurValue()){
-      lanceur.setActuator(Value.kForward);
-    }else {
-      lanceur.setActuator(Value.kOff);
-    }
     if (lanceur.getLanceurEnable()) {
       lanceur.setSpeed(Constants.SPEED.LANCEUR_SPEED);
     }

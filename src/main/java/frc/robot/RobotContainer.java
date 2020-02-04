@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.ActiverDesactiverLanceurCommand;
 import frc.robot.commands.ActiverDesactiverSlowModeCommand;
 import frc.robot.commands.ChargerCommand;
 import frc.robot.commands.DrivetrainDriveCommand;
@@ -65,11 +66,10 @@ public class RobotContainer {
   private void configureButtonBindings() {
     new JoystickButton(coDriverController, Button.kBumperRight.value).whileHeld(new GobeurCommand(gobeur, Constants.SPEED.GOBEUR_SPEED));
     new JoystickButton(coDriverController, Button.kBumperLeft.value).whileHeld(new GobeurCommand(gobeur, -Constants.SPEED.GOBEUR_SPEED));
-    new JoystickButton(coDriverController, Button.kA.value).whileHeld(new LanceurCommand(lanceur));
-    new JoystickButton(coDriverController, Button.kX.value).whileHeld(new LanceurCommand(lanceur));
     new JoystickButton(driverController, Button.kA.value).whenPressed(new ActiverDesactiverSlowModeCommand(drivetrain));
     new JoystickButton(coDriverController, Button.kB.value).whenPressed(new MonterPourTirerCommand(feeder));
-    new JoystickButton(coDriverController, Button.kStart.value).whileHeld(new ParallelCommandGroup(new LanceurCommand(lanceur), new TournerFeederCommand(feeder)));
+    new JoystickButton(coDriverController, Button.kX.value).whileHeld(new TournerFeederCommand(feeder));
+    new JoystickButton(coDriverController, Button.kA.value).whenPressed(new ActiverDesactiverLanceurCommand(lanceur));
     new DigitalInputButton(feeder.getCapteurRest()).whenPressed(new ChargerCommand(feeder));
 
     }

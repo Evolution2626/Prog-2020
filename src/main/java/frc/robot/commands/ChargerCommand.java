@@ -44,6 +44,9 @@ public class ChargerCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return feeder.countBallon() > previousCount;
+    if (feeder.getCapteurValue(4)) {
+      return true;
+    }
+    return (feeder.countBallon() > previousCount) && !feeder.getCapteurRestValue();
   }
 }
