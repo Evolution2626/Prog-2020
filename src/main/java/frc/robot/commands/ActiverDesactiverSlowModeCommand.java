@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.subsystems.Drivetrain;
+import frc.util.records.Logs;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -27,5 +28,10 @@ public class ActiverDesactiverSlowModeCommand extends InstantCommand {
   @Override
   public void initialize() {
     drivetrain.setSlowMode(!drivetrain.getSlowMode());
+    if (drivetrain.getSlowMode()) {
+      Logs.addEvenement("SlowMode Activé");
+    } else {
+      Logs.addEvenement("SlowMode Désactivé");
+    }
   }
 }

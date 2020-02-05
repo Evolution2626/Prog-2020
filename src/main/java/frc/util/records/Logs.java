@@ -9,13 +9,35 @@ package frc.util.records;
 
 import java.util.Vector;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import edu.wpi.first.wpilibj.Timer;
+
 /**
  * Add your docs here.
  */
 public class Logs {
     public static Vector<Evenement> evenements = new Vector<Evenement>();
+     
+
 
     public static void addEvenement(double elapsedTime, String description){
         evenements.add(new Evenement(elapsedTime, description));
+
+    }
+    public static void addEvenement(String description){
+        evenements.add(new Evenement(Timer.getMatchTime() , description));
+
+    }
+
+    public static void eraseVector(){
+        evenements.clear();
+    }
+
+    public static String toText(){
+        GsonBuilder builder = new GsonBuilder();
+        Gson gson = builder.create();
+        return gson.toJson(evenements);
     }
 }

@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Feeder;
+import frc.util.records.Logs;
 
 public class MonterPourTirerCommand extends CommandBase {
   /**
@@ -37,6 +38,8 @@ public class MonterPourTirerCommand extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     feeder.enableFeeder(false);
+    Logs.addEvenement("Ballon Monté");
+
   }
 
   // Returns true when the command should end.

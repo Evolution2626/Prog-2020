@@ -70,6 +70,13 @@ public class Drivetrain extends SubsystemBase {
     arriereGauche.set(gauche);
   }
 
+  public void driveTankVolts(double gauche, double droite){
+    avantDroit.setVoltage(droite);
+    avantGauche.setVoltage(gauche);
+    arriereDroit.setVoltage(droite);
+    arriereGauche.setVoltage(gauche);
+  }
+
   
 
   public void setSlowMode(boolean state){

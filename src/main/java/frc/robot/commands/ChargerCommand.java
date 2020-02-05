@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Feeder;
+import frc.util.records.Logs;
 
 public class ChargerCommand extends CommandBase {
   /**
@@ -39,6 +40,7 @@ public class ChargerCommand extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     feeder.enableFeeder(false);
+    Logs.addEvenement("Ballon Chargé");
   }
 
   // Returns true when the command should end.

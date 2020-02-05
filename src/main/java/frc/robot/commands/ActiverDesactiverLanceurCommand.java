@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.subsystems.Lanceur;
+import frc.util.records.Logs;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -27,5 +28,10 @@ public class ActiverDesactiverLanceurCommand extends InstantCommand {
   @Override
   public void initialize() {
     lanceur.enableLanceur(!lanceur.getLanceurEnable());
+    if (lanceur.getLanceurEnable()) {
+      Logs.addEvenement("Lanceur Activé");
+    }else{
+      Logs.addEvenement("Lanceur Désactivé");
+    }
   }
 }

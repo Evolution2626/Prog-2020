@@ -7,8 +7,7 @@
 
 package frc.robot.commands;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+
 
 import edu.wpi.first.wpilibj.RobotState;
 import edu.wpi.first.wpilibj.XboxController;
@@ -24,7 +23,6 @@ public class DrivetrainDriveCommand extends CommandBase {
    */
   private Drivetrain drivetrain;
   private XboxController controller;
-  private GsonBuilder builder = new GsonBuilder();
 
   public DrivetrainDriveCommand(Drivetrain drivetrain, XboxController controller) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -55,8 +53,7 @@ public class DrivetrainDriveCommand extends CommandBase {
         drivetrain.driveTank(speedGauche * .5, speedDroit * .5);
       }
     }
-    Gson gson = builder.create();
-    System.out.println(gson.toJson(drivetrain));
+    
   }
 
   // Called once the command ends or is interrupted.
