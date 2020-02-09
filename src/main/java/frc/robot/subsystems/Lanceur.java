@@ -10,7 +10,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
-import edu.wpi.first.wpilibj.DigitalInput;
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -21,13 +21,13 @@ public class Lanceur extends SubsystemBase {
   public VictorSPX lanceurHaut;
   public VictorSPX lanceurBas;
   public boolean lanceurEnable = false;
-  public DigitalInput capteur;
+  
   
 
   public Lanceur() {
     lanceurHaut = new VictorSPX(Constants.CAN.MOTEUR_LANCEUR_HAUT);
     lanceurBas = new VictorSPX(Constants.CAN.MOTEUR_LANCEUR_BAS);
-    capteur = new DigitalInput(Constants.DIO.CAPTEUR_LANCEUR);
+    
   }
 
   public void setSpeed(double speed){
@@ -41,10 +41,6 @@ public class Lanceur extends SubsystemBase {
 
   public boolean getLanceurEnable(){
     return lanceurEnable;
-  }
-
-  public boolean getCapteurLanceurValue(){
-    return capteur.get();
   }
 
   @Override

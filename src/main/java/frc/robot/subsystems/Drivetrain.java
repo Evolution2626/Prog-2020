@@ -11,6 +11,12 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.CANSparkMax;
 
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.geometry.Pose2d;
+import edu.wpi.first.wpilibj.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -25,6 +31,12 @@ public class Drivetrain extends SubsystemBase {
   private CANSparkMax arriereDroit;
   private CANSparkMax arriereGauche;
   public boolean slowMode = false;
+
+  
+
+  public Gyro gyro = new ADXRS450_Gyro();
+
+  public DifferentialDriveOdometry odometry;
 
   public Drivetrain() {
 
@@ -54,6 +66,10 @@ public class Drivetrain extends SubsystemBase {
     arriereGauche.clearFaults();
 
     setAllCurrentLimit(20, 15);
+
+    resetEncoder();
+
+    odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(getHeading()));
   }
 
   public void setAllCurrentLimit(int stall, int free){
@@ -77,7 +93,45 @@ public class Drivetrain extends SubsystemBase {
     arriereGauche.setVoltage(gauche);
   }
 
+  public double getLeftEncodersPosition(){
+    return ((avantGauche.getEncoder().getPosition() + arriereGauche.getEncoder().getPosition()) /2) * Constants.ROBOT_CHARACTERIZATION.encoderConstant;
+  }
+
+  public double getRightEncodersPosition(){
+    return ((avantDroit.getEncoder().getPosition() + arriereDroit.getEncoder().getPosition()) /2) * Constants.ROBOT_CHARACTERIZATION.encoderConstant;
+  }
+
+  public double getLeftEncodersRate(){
+    return ((avantGauche.getEncoder().getVelocity() + arriereGauche.getEncoder().getVelocity()) /2) * Constants.ROBOT_CHARACTERIZATION.encoderConstant / 60.;
+  }
+
+  public double getRightEncodersRate(){
+    return ((avantDroit.getEncoder().getVelocity() + arriereDroit.getEncoder().getVelocity()) /2) * Constants.ROBOT_CHARACTERIZATION.encoderConstant / 60.;
+  }
   
+  public void resetEncoder(){
+    avantDroit.getEncoder().setPosition(0);
+    avantGauche.getEncoder().setPosition(0);
+    arriereDroit.getEncoder().setPosition(0);
+    arriereGauche.getEncoder().setPosition(0);
+  }
+
+  public double getHeading(){
+    return Math.IEEEremainder(gyro.getAngle(), 360);
+  }
+
+  public Pose2d getPose(){
+    return odometry.getPoseMeters();
+  }
+
+  public void resetOdometry(Pose2d pose){
+    resetEncoder();
+    odometry.resetPosition(pose, Rotation2d.fromDegrees(getHeading()));
+  }
+  
+  public DifferentialDriveWheelSpeeds getWheelSpeed(){
+    return new DifferentialDriveWheelSpeeds(getLeftEncodersRate(), getRightEncodersRate());
+  }
 
   public void setSlowMode(boolean state){
     slowMode = state;
@@ -90,6 +144,7 @@ public class Drivetrain extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    odometry.update(Rotation2d.fromDegrees(getHeading()), getLeftEncodersPosition(), getRightEncodersPosition());
     SmartDashboard.putBoolean("Slow Mode", getSlowMode());
   }
 }

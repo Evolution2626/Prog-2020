@@ -22,6 +22,7 @@ public class Feeder extends SubsystemBase {
   private VictorSPX feeder;
   private DigitalInput[] capteurs = new DigitalInput[5];
   private DigitalInput capteurRest;
+  public DigitalInput capteurLanceur;
 
 
 
@@ -34,6 +35,7 @@ public class Feeder extends SubsystemBase {
     capteurs[3] = new DigitalInput(Constants.DIO.CAPTEUR_QUATRE);
     capteurs[4] = new DigitalInput(Constants.DIO.CAPTEUR_CINQ);
     capteurRest = new DigitalInput(Constants.DIO.CAPTEUR_REST);
+    capteurLanceur = new DigitalInput(Constants.DIO.CAPTEUR_LANCEUR);
 
   }
 
@@ -59,6 +61,10 @@ public class Feeder extends SubsystemBase {
 
   public DigitalInput getCapteurRest(){
     return capteurRest;
+  }
+
+  public boolean getCapteurLanceurValue(){
+    return !capteurLanceur.get();
   }
 
   public int countBallon(){
