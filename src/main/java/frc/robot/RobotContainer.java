@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ActiverDesactiverLanceurCommand;
 import frc.robot.commands.ActiverDesactiverSlowModeCommand;
 import frc.robot.commands.AutonomousCommands;
+import frc.robot.commands.AvancerPiedsCommand;
 import frc.robot.commands.ChargerCommand;
 import frc.robot.commands.DrivetrainDriveCommand;
 import frc.robot.commands.GobeurCommand;
@@ -66,6 +67,7 @@ public class RobotContainer {
     chooser.addOption("Straight", new SequentialCommandGroup(new WaitAutonomousTimerCommand(), AutonomousCommands.autonomusStraightCommand(drivetrain, lanceur, feeder)));
     chooser.addOption("Right", new SequentialCommandGroup(new WaitAutonomousTimerCommand(), AutonomousCommands.autonomusRightCommand(drivetrain, lanceur, feeder)));
     chooser.addOption("Left", new SequentialCommandGroup(new WaitAutonomousTimerCommand(), AutonomousCommands.autonomusLeftCommand(drivetrain, lanceur, feeder)));
+    chooser.addOption("AvancerPieds", new AvancerPiedsCommand(drivetrain, 3));
     SmartDashboard.putData("Auto Choice", chooser);
     drivetrain.setDefaultCommand(new DrivetrainDriveCommand(drivetrain, driverController));
     lanceur.setDefaultCommand(new LanceurCommand(lanceur));

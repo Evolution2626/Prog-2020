@@ -88,5 +88,8 @@ public interface Constants {
         double kRamseteZeta = 0.7;
 
         double encoderConstant = (1/10.71) * .1524 * Math.PI;
+
+        double encoderConstantPieds = (1/10.71) * .5 * Math.PI;
+
     }
 }

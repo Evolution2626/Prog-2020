@@ -55,10 +55,10 @@ public class Drivetrain extends SubsystemBase {
     arriereDroit.setClosedLoopRampRate(.1);
     arriereGauche.setClosedLoopRampRate(.1);
 
-    avantDroit.setInverted(false);
-    avantGauche.setInverted(true);
-    arriereDroit.setInverted(false);
-    arriereGauche.setInverted(true);
+    avantDroit.setInverted(true);
+    avantGauche.setInverted(false);
+    arriereDroit.setInverted(true);
+    arriereGauche.setInverted(false);
 
     avantDroit.clearFaults();
     avantGauche.clearFaults();
@@ -94,11 +94,11 @@ public class Drivetrain extends SubsystemBase {
   }
 
   public double getLeftEncodersPosition(){
-    return ((avantGauche.getEncoder().getPosition() + arriereGauche.getEncoder().getPosition()) /2) * Constants.ROBOT_CHARACTERIZATION.encoderConstant;
+    return ((avantGauche.getEncoder().getPosition() + arriereGauche.getEncoder().getPosition()) /2);
   }
 
   public double getRightEncodersPosition(){
-    return ((avantDroit.getEncoder().getPosition() + arriereDroit.getEncoder().getPosition()) /2) * Constants.ROBOT_CHARACTERIZATION.encoderConstant;
+    return ((avantDroit.getEncoder().getPosition() + arriereDroit.getEncoder().getPosition()) /2);
   }
 
   public double getLeftEncodersRate(){
@@ -146,5 +146,12 @@ public class Drivetrain extends SubsystemBase {
     // This method will be called once per scheduler run
     odometry.update(Rotation2d.fromDegrees(getHeading()), getLeftEncodersPosition(), getRightEncodersPosition());
     SmartDashboard.putBoolean("Slow Mode", getSlowMode());
+    SmartDashboard.putNumber("Encoder Left", getLeftEncodersPosition());
+    SmartDashboard.putNumber("Encoder Right", getRightEncodersPosition());
+    SmartDashboard.putNumber("Encoder 1", avantDroit.getEncoder().getPosition());
+    SmartDashboard.putNumber("Encoder 2", avantGauche.getEncoder().getPosition());
+    SmartDashboard.putNumber("Encoder 3", arriereDroit.getEncoder().getPosition());
+    SmartDashboard.putNumber("Encoder 4", arriereGauche.getEncoder().getPosition());
+
   }
 }
