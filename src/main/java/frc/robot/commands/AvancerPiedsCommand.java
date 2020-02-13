@@ -10,6 +10,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Drivetrain;
+import frc.util.Range;
 
 public class AvancerPiedsCommand extends CommandBase {
   /**
@@ -18,8 +19,7 @@ public class AvancerPiedsCommand extends CommandBase {
   private Drivetrain drivetrain;
   private double pieds;
   private double toursEncoder;
-  private double P, I, D = 1;
-  private double integral, error, previous_error, derivative = 0;
+  private double P = .1;
   
 
   public AvancerPiedsCommand(Drivetrain drivetrain, double pieds){
@@ -31,10 +31,8 @@ public class AvancerPiedsCommand extends CommandBase {
   }
 
   private double PID(){
-    error = pieds - ((drivetrain.getLeftEncodersPosition() + drivetrain.getRightEncodersPosition())/2)*Constants.ROBOT_CHARACTERIZATION.encoderConstantPieds;
-    integral += (error*.02);
-    derivative = (error - previous_error)/.02;
-    return P*error + I*integral + D*derivative;
+    double error = pieds - ((drivetrain.getLeftEncodersPosition() + drivetrain.getRightEncodersPosition())/2)*Constants.ROBOT_CHARACTERIZATION.encoderConstantPieds;
+    return P*error;
   }
 
   // Called when the command is initially scheduled.
@@ -46,7 +44,7 @@ public class AvancerPiedsCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double speed = PID();
+    double speed = Range.coerce(-1, 1, PID());
     drivetrain.driveTank(speed, speed);
   }
 
