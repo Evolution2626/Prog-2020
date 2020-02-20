@@ -20,7 +20,7 @@ public class AvancerPiedsCommand extends CommandBase {
   private double pieds;
   private double toursEncoder;
   private double P = .2;
-  
+   
 
   public AvancerPiedsCommand(Drivetrain drivetrain, double pieds){
     // Use addRequirements() here to declare subsystem dependencies.
@@ -28,11 +28,16 @@ public class AvancerPiedsCommand extends CommandBase {
     this.pieds = pieds;
     addRequirements(drivetrain);
     toursEncoder = pieds / Constants.ROBOT_CHARACTERIZATION.encoderConstantPieds;
+
   }
 
   private double PID(){
     double error = pieds - ((drivetrain.getLeftEncodersPosition() + drivetrain.getRightEncodersPosition())/2)*Constants.ROBOT_CHARACTERIZATION.encoderConstantPieds;
     return P*error;
+  }
+
+  private double getVelocityError(){
+    return ((drivetrain.getLeftEncodersVelocity() + drivetrain.getRightEncodersVelocity())/2);
   }
 
   // Called when the command is initially scheduled.
