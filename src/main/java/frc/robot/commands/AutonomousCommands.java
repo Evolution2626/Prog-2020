@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Feeder;
 import frc.robot.subsystems.Lanceur;
@@ -18,7 +19,7 @@ import frc.robot.subsystems.Lanceur;
  */
 public class AutonomousCommands {
 
-    public static Command autonomusStraightCommand(Drivetrain drivetrain, Lanceur lanceur, Feeder feeder){
+    public static Command autonomousStraightCommand(Drivetrain drivetrain, Lanceur lanceur, Feeder feeder){
         return new SequentialCommandGroup(TrajectoryCommands.getCommand(TrajectoryCommands.trajectoryStraight(), drivetrain),
                                           new ActiverDesactiverLanceurCommand(lanceur),
                                           new LancerUnBallonCommand(feeder),
@@ -28,7 +29,7 @@ public class AutonomousCommands {
                                           TrajectoryCommands.getCommand(TrajectoryCommands.trajectoryStraightSuite(), drivetrain)
                                           );
     }
-    public static Command autonomusRightCommand(Drivetrain drivetrain, Lanceur lanceur, Feeder feeder){
+    public static Command autonomousRightCommand(Drivetrain drivetrain, Lanceur lanceur, Feeder feeder){
         return new SequentialCommandGroup(TrajectoryCommands.getCommand(TrajectoryCommands.trajectoryStraight(), drivetrain),
                                           new ActiverDesactiverLanceurCommand(lanceur),
                                           new LancerUnBallonCommand(feeder),
@@ -38,7 +39,7 @@ public class AutonomousCommands {
                                           TrajectoryCommands.getCommand(TrajectoryCommands.trajectoryStraightSuite(), drivetrain)
                                           );
     }
-    public static Command autonomusLeftCommand(Drivetrain drivetrain, Lanceur lanceur, Feeder feeder){
+    public static Command autonomousLeftCommand(Drivetrain drivetrain, Lanceur lanceur, Feeder feeder){
         return new SequentialCommandGroup(TrajectoryCommands.getCommand(TrajectoryCommands.trajectoryStraight(), drivetrain),
                                           new ActiverDesactiverLanceurCommand(lanceur),
                                           new LancerUnBallonCommand(feeder),
@@ -46,6 +47,39 @@ public class AutonomousCommands {
                                           new LancerUnBallonCommand(feeder),
                                           new ActiverDesactiverLanceurCommand(lanceur),
                                           TrajectoryCommands.getCommand(TrajectoryCommands.trajectoryStraightSuite(), drivetrain)
+                                          );
+    }
+    public static Command autonomousTestCommand(Drivetrain drivetrain, Lanceur lanceur, Feeder feeder){
+        return new SequentialCommandGroup(new AvancerPiedsCommand(drivetrain, 3.5),
+                                          new WaitCommand(1),
+                                          new TournerGyroCommand(drivetrain, 90),
+                                          new WaitCommand(1),
+                                          new AvancerPiedsCommand(drivetrain, 3.5),
+                                          new WaitCommand(1),
+                                          new TournerGyroCommand(drivetrain, 90),
+                                          new WaitCommand(1),
+                                          new AvancerPiedsCommand(drivetrain, 7),
+                                          new WaitCommand(1),
+                                          new TournerGyroCommand(drivetrain, 90),
+                                          new WaitCommand(1),
+                                          new AvancerPiedsCommand(drivetrain, 3.5),
+                                          new WaitCommand(1),
+                                          new TournerGyroCommand(drivetrain, 90),
+                                          new WaitCommand(1),
+                                          new AvancerPiedsCommand(drivetrain, 3.5),
+                                          new WaitCommand(1),
+                                          new StopDrivetrainMotorsCommand(drivetrain) 
+                                          );
+    }
+    public static Command autonomousRotateTestCommand(Drivetrain drivetrain, Lanceur lanceur, Feeder feeder){
+        return new SequentialCommandGroup(new TournerGyroCommand(drivetrain, 90),
+                                          new WaitCommand(1),
+                                          new TournerGyroCommand(drivetrain, -90),
+                                          new WaitCommand(1),
+                                          new TournerGyroCommand(drivetrain, 180),
+                                          new WaitCommand(1),
+                                          new TournerGyroCommand(drivetrain, -180),
+                                          new StopDrivetrainMotorsCommand(drivetrain) 
                                           );
     }
 

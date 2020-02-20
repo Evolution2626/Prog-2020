@@ -33,10 +33,10 @@ public interface Constants {
         
     }
     public interface CAN {
-        int MOTEUR_AVANT_DROIT = 1;
-        int MOTEUR_AVANT_GAUCHE = 3;
-        int MOTEUR_ARRIERE_DROIT = 2;
-        int MOTEUR_ARRIERE_GAUCHE = 4;
+        int MOTEUR_AVANT_DROIT = 3;
+        int MOTEUR_AVANT_GAUCHE = 2;
+        int MOTEUR_ARRIERE_DROIT = 4;
+        int MOTEUR_ARRIERE_GAUCHE = 10;
         int GOBEUR = 0;
         int MOTEUR_LANCEUR_HAUT = 0;
         int MOTEUR_LANCEUR_BAS =0;
@@ -89,7 +89,7 @@ public interface Constants {
 
         double encoderConstant = (1/10.71) * .1524 * Math.PI;
 
-        double encoderConstantPieds = (1/10.71) * .5 * Math.PI;
+        double encoderConstantPieds = (1/10.71) * .47119304 * Math.PI;
 
     }
 }

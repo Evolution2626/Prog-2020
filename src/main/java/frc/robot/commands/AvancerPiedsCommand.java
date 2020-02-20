@@ -19,7 +19,7 @@ public class AvancerPiedsCommand extends CommandBase {
   private Drivetrain drivetrain;
   private double pieds;
   private double toursEncoder;
-  private double P = .1;
+  private double P = .2;
   
 
   public AvancerPiedsCommand(Drivetrain drivetrain, double pieds){
@@ -44,7 +44,8 @@ public class AvancerPiedsCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double speed = Range.coerce(-1, 1, PID());
+    double speed = Range.coerce(-.5, .5, PID());
+    speed = Range.minCoerce(.1, speed);
     drivetrain.driveTank(speed, speed);
   }
 

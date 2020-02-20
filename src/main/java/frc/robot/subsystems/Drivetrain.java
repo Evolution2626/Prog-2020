@@ -31,7 +31,6 @@ public class Drivetrain extends SubsystemBase {
   private CANSparkMax arriereDroit;
   private CANSparkMax arriereGauche;
   public boolean slowMode = false;
-
   
 
   public Gyro gyro = new ADXRS450_Gyro();
@@ -50,10 +49,10 @@ public class Drivetrain extends SubsystemBase {
     arriereDroit.setIdleMode(IdleMode.kBrake);
     arriereGauche.setIdleMode(IdleMode.kBrake);
 
-    avantDroit.setClosedLoopRampRate(.1);
-    avantGauche.setClosedLoopRampRate(.1);
-    arriereDroit.setClosedLoopRampRate(.1);
-    arriereGauche.setClosedLoopRampRate(.1);
+    avantDroit.setClosedLoopRampRate(.5);
+    avantGauche.setClosedLoopRampRate(.5);
+    arriereDroit.setClosedLoopRampRate(.5);
+    arriereGauche.setClosedLoopRampRate(.5);
 
     avantDroit.setInverted(true);
     avantGauche.setInverted(false);
@@ -64,6 +63,18 @@ public class Drivetrain extends SubsystemBase {
     avantGauche.clearFaults();
     arriereDroit.clearFaults();
     arriereGauche.clearFaults();
+
+    avantDroit.follow(arriereDroit);
+    avantGauche.follow(arriereGauche);
+
+    /*arriereDroit.getPIDController().setP(P);
+    arriereGauche.getPIDController().setP(P);
+    arriereDroit.getPIDController().setI(I);
+    arriereGauche.getPIDController().setI(I);
+    arriereDroit.getPIDController().setD(D);
+    arriereGauche.getPIDController().setD(D);
+*/
+
 
     setAllCurrentLimit(20, 15);
 
@@ -80,15 +91,11 @@ public class Drivetrain extends SubsystemBase {
   }
 
   public void driveTank(double gauche, double droite){
-    avantDroit.set(droite);
-    avantGauche.set(gauche);
     arriereDroit.set(droite);
     arriereGauche.set(gauche);
   }
 
   public void driveTankVolts(double gauche, double droite){
-    avantDroit.setVoltage(droite);
-    avantGauche.setVoltage(gauche);
     arriereDroit.setVoltage(droite);
     arriereGauche.setVoltage(gauche);
   }
@@ -99,6 +106,14 @@ public class Drivetrain extends SubsystemBase {
 
   public double getRightEncodersPosition(){
     return ((avantDroit.getEncoder().getPosition() + arriereDroit.getEncoder().getPosition()) /2);
+  }
+
+  public double getRightEncodersVelocity(){
+    return((avantDroit.getEncoder().getVelocity() + arriereDroit.getEncoder().getVelocity())/2);
+  }
+
+  public double getLefttEncodersVelocity(){
+    return((avantGauche.getEncoder().getVelocity() + arriereGauche.getEncoder().getVelocity())/2);
   }
 
   public double getLeftEncodersRate(){
@@ -122,6 +137,14 @@ public class Drivetrain extends SubsystemBase {
 
   public Pose2d getPose(){
     return odometry.getPoseMeters();
+  }
+
+  public void resetGyro(){
+    gyro.reset();
+  }
+
+  public double getGyroAngle(){
+    return gyro.getAngle();
   }
 
   public void resetOdometry(Pose2d pose){
@@ -152,6 +175,7 @@ public class Drivetrain extends SubsystemBase {
     SmartDashboard.putNumber("Encoder 2", avantGauche.getEncoder().getPosition());
     SmartDashboard.putNumber("Encoder 3", arriereDroit.getEncoder().getPosition());
     SmartDashboard.putNumber("Encoder 4", arriereGauche.getEncoder().getPosition());
+    SmartDashboard.putNumber("GyroAngle", getGyroAngle());
 
   }
 }
