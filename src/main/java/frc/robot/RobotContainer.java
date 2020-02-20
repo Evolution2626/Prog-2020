@@ -27,6 +27,7 @@ import frc.robot.commands.GobeurCommand;
 import frc.robot.commands.LanceurCommand;
 import frc.robot.commands.MonterPourTirerCommand;
 import frc.robot.commands.TournerFeederCommand;
+import frc.robot.commands.TournerGyroCommand;
 import frc.robot.commands.WaitAutonomousTimerCommand;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Feeder;
@@ -64,10 +65,13 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
     SmartDashboard.putNumber("Autonomous Wait", 0);
-    chooser.addOption("Straight", new SequentialCommandGroup(new WaitAutonomousTimerCommand(), AutonomousCommands.autonomusStraightCommand(drivetrain, lanceur, feeder)));
-    chooser.addOption("Right", new SequentialCommandGroup(new WaitAutonomousTimerCommand(), AutonomousCommands.autonomusRightCommand(drivetrain, lanceur, feeder)));
-    chooser.addOption("Left", new SequentialCommandGroup(new WaitAutonomousTimerCommand(), AutonomousCommands.autonomusLeftCommand(drivetrain, lanceur, feeder)));
-    chooser.addOption("AvancerPieds", new AvancerPiedsCommand(drivetrain, 3));
+    chooser.addOption("Straight", new SequentialCommandGroup(new WaitAutonomousTimerCommand(), AutonomousCommands.autonomousStraightCommand(drivetrain, lanceur, feeder)));
+    chooser.addOption("Right", new SequentialCommandGroup(new WaitAutonomousTimerCommand(), AutonomousCommands.autonomousRightCommand(drivetrain, lanceur, feeder)));
+    chooser.addOption("Left", new SequentialCommandGroup(new WaitAutonomousTimerCommand(), AutonomousCommands.autonomousLeftCommand(drivetrain, lanceur, feeder)));
+    chooser.addOption("AvancerPieds", new AvancerPiedsCommand(drivetrain, 6));
+    chooser.addOption("Tourner 180", new TournerGyroCommand(drivetrain, 90));
+    chooser.addOption("Autonomous Test", AutonomousCommands.autonomousTestCommand(drivetrain, lanceur, feeder));
+    chooser.addOption("Autonomous Rotate Test", AutonomousCommands.autonomousRotateTestCommand(drivetrain, lanceur, feeder));
     SmartDashboard.putData("Auto Choice", chooser);
     drivetrain.setDefaultCommand(new DrivetrainDriveCommand(drivetrain, driverController));
     lanceur.setDefaultCommand(new LanceurCommand(lanceur));
