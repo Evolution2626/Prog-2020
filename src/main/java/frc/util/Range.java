@@ -36,6 +36,15 @@ public class Range{
         return number;
     }
 
+    public static double minCoerce(double threshold, double number){
+        if (number == 0) return 0;
+        if (inRange(-threshold, threshold, number)){
+            if (number > 0) return threshold;
+            if (number < 0) return -threshold;
+        }
+        return number;
+    }
+
     /**
      * Fonction threshold qui retourne 0 si le nombre est trop petit selon le threshold demandé
      * @param threshold
