@@ -56,4 +56,40 @@ public class Range{
         return number;
     }
 
+
+    public static class DoubleCoerce{
+        private double speedLeft;
+        private double speedRight;
+        private double maxSpeed;
+
+        public DoubleCoerce(double speedLeft, double speedRight, double maxSpeed){
+            this.speedLeft = speedLeft;
+            this.speedRight = speedRight;
+            this.maxSpeed = maxSpeed;
+        }
+
+
+        public double getSpeedLeft(){
+            if (Math.abs(speedLeft) > maxSpeed) {
+                if (speedRight > speedLeft){
+                    return (speedLeft/speedRight)*maxSpeed;
+                } else {
+                    return maxSpeed;
+                }
+            }
+            return speedLeft;
+        }
+
+        public double getSpeedRight(){
+            if (Math.abs(speedRight) > maxSpeed) {
+                if (speedLeft > speedRight) {
+                    return (speedRight/speedLeft)*maxSpeed;
+                } else {
+                    return maxSpeed;
+                }
+            }
+            return speedRight;
+        }
+
+    }
 }

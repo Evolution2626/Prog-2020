@@ -67,14 +67,6 @@ public class Drivetrain extends SubsystemBase {
     avantDroit.follow(arriereDroit);
     avantGauche.follow(arriereGauche);
 
-    /*arriereDroit.getPIDController().setP(P);
-    arriereGauche.getPIDController().setP(P);
-    arriereDroit.getPIDController().setI(I);
-    arriereGauche.getPIDController().setI(I);
-    arriereDroit.getPIDController().setD(D);
-    arriereGauche.getPIDController().setD(D);
-*/
-
 
     setAllCurrentLimit(20, 15);
 
@@ -164,6 +156,8 @@ public class Drivetrain extends SubsystemBase {
     return slowMode;
   }
 
+  
+  
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

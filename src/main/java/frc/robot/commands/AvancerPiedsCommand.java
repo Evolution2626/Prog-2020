@@ -19,7 +19,7 @@ public class AvancerPiedsCommand extends CommandBase {
   private Drivetrain drivetrain;
   private double pieds;
   private double toursEncoder;
-  private double P = .2;
+  private Range.DoubleCoerce doubleCoerce;
    
 
   public AvancerPiedsCommand(Drivetrain drivetrain, double pieds){
@@ -28,13 +28,14 @@ public class AvancerPiedsCommand extends CommandBase {
     this.pieds = pieds;
     addRequirements(drivetrain);
     toursEncoder = pieds / Constants.ROBOT_CHARACTERIZATION.encoderConstantPieds;
-
   }
 
-  private double PID(){
-    double error = pieds - ((drivetrain.getLeftEncodersPosition() + drivetrain.getRightEncodersPosition())/2)*Constants.ROBOT_CHARACTERIZATION.encoderConstantPieds;
+  private double PID(double value, double P){
+    double error = pieds - value;
     return P*error;
   }
+
+
 
   private double getVelocityError(){
     return ((drivetrain.getLeftEncodersVelocity() + drivetrain.getRightEncodersVelocity())/2);
@@ -49,9 +50,13 @@ public class AvancerPiedsCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double speed = Range.coerce(-.5, .5, PID());
-    speed = Range.minCoerce(.1, speed);
-    drivetrain.driveTank(speed, speed);
+    double speedDroit = PID(drivetrain.getRightEncodersPosition()*Constants.ROBOT_CHARACTERIZATION.encoderConstantPieds, .2);
+    double speedGauche = PID(drivetrain.getLeftEncodersPosition()*Constants.ROBOT_CHARACTERIZATION.encoderConstantPieds, .2);
+    double alignement = PID((drivetrain.getRightEncodersPosition()-drivetrain.getLeftEncodersPosition())* Constants.ROBOT_CHARACTERIZATION.encoderConstantPieds, .2);
+    speedDroit -= alignement;
+    speedGauche += alignement;
+    doubleCoerce = new Range.DoubleCoerce(speedGauche, speedDroit, .5);
+    drivetrain.driveTank(doubleCoerce.getSpeedLeft(), doubleCoerce.getSpeedRight());
   }
 
   // Called once the command ends or is interrupted.
