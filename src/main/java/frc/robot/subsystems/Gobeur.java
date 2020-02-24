@@ -8,8 +8,10 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -25,6 +27,9 @@ public class Gobeur extends SubsystemBase {
   public Gobeur() {
     gobeur = new TalonSRX(Constants.CAN.GOBEUR);
     monteurGobeur = new CANSparkMax(Constants.CAN.MOTEUR_LEVER_GOBEUR, MotorType.kBrushless);
+
+    monteurGobeur.setIdleMode(IdleMode.kBrake);
+    gobeur.setNeutralMode(NeutralMode.Brake);
   }
   public void setSpeed(double speed){
     gobeur.set(ControlMode.PercentOutput, speed);
