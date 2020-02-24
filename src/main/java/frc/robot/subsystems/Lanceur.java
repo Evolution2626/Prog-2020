@@ -8,7 +8,8 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -18,16 +19,18 @@ public class Lanceur extends SubsystemBase {
   /**
    * Creates a new Lanceur.
    */
-  public VictorSPX lanceurHaut;
-  public VictorSPX lanceurBas;
+  public TalonSRX lanceurHaut;
+  public TalonSRX lanceurBas;
   public boolean lanceurEnable = false;
   
   
 
   public Lanceur() {
-    lanceurHaut = new VictorSPX(Constants.CAN.MOTEUR_LANCEUR_HAUT);
-    lanceurBas = new VictorSPX(Constants.CAN.MOTEUR_LANCEUR_BAS);
+    lanceurHaut = new TalonSRX(Constants.CAN.MOTEUR_LANCEUR_HAUT);
+    lanceurBas = new TalonSRX(Constants.CAN.MOTEUR_LANCEUR_BAS);
     
+    lanceurBas.setNeutralMode(NeutralMode.Brake);
+    lanceurHaut.setNeutralMode(NeutralMode.Brake);
   }
 
   public void setSpeed(double speed){
