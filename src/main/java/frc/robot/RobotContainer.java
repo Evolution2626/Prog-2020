@@ -20,17 +20,20 @@ import frc.robot.commands.ActiverDesactiverLanceurCommand;
 import frc.robot.commands.ActiverDesactiverSlowModeCommand;
 import frc.robot.commands.AutonomousCommands;
 import frc.robot.commands.AvancerPiedsCommand;
-import frc.robot.commands.ChargerCommand;
+import frc.robot.commands.DescendreGrimpeurCommand;
 import frc.robot.commands.DrivetrainDriveCommand;
+import frc.robot.commands.FeederMonterUnBallonCommand;
+import frc.robot.commands.FeederTournerBasCommand;
+import frc.robot.commands.FeederTournerHautBasCommand;
 import frc.robot.commands.GobeurCommand;
 import frc.robot.commands.LanceurCommand;
-import frc.robot.commands.MonterPourTirerCommand;
-import frc.robot.commands.TournerFeederCommand;
+import frc.robot.commands.MonterGrimpeurCommand;
 import frc.robot.commands.TournerGyroCommand;
 import frc.robot.commands.WaitAutonomousTimerCommand;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Feeder;
 import frc.robot.subsystems.Gobeur;
+import frc.robot.subsystems.Grimpeur;
 import frc.robot.subsystems.Lanceur;
 import frc.util.DigitalInputButton;
 
@@ -50,6 +53,8 @@ public class RobotContainer {
   private final Lanceur lanceur = new Lanceur();
 
   private final Feeder feeder = new Feeder();
+
+  private final Grimpeur grimpeur = new Grimpeur();
 
   private final XboxController driverController = new XboxController(Constants.USB.DRIVER_GAMEPAD);
 
@@ -86,10 +91,11 @@ public class RobotContainer {
     new JoystickButton(coDriverController, Button.kBumperRight.value).whileHeld(new GobeurCommand(gobeur, Constants.SPEED.GOBEUR_SPEED));
     new JoystickButton(coDriverController, Button.kBumperLeft.value).whileHeld(new GobeurCommand(gobeur, -Constants.SPEED.GOBEUR_SPEED));
     new JoystickButton(driverController, Button.kA.value).whenPressed(new ActiverDesactiverSlowModeCommand(drivetrain));
-    new JoystickButton(coDriverController, Button.kB.value).whenPressed(new MonterPourTirerCommand(feeder));
-    new JoystickButton(coDriverController, Button.kX.value).whileHeld(new TournerFeederCommand(feeder));
+    new JoystickButton(coDriverController, Button.kX.value).whileHeld(new FeederTournerHautBasCommand(feeder));
     new JoystickButton(coDriverController, Button.kA.value).whenPressed(new ActiverDesactiverLanceurCommand(lanceur));
-    new DigitalInputButton(feeder.getCapteurRest()).whenPressed(new ChargerCommand(feeder));
+    new DigitalInputButton(feeder.getCapteurRaw(0)).whileHeld(new FeederMonterUnBallonCommand(feeder));
+    new JoystickButton(coDriverController, Button.kY.value).whenPressed(new MonterGrimpeurCommand(grimpeur));
+    new JoystickButton(coDriverController, Button.kB.value).whileHeld(new DescendreGrimpeurCommand(grimpeur));
 
     }
 
