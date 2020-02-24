@@ -40,7 +40,8 @@ public interface Constants {
         int GOBEUR = 0;
         int MOTEUR_LANCEUR_HAUT = 0;
         int MOTEUR_LANCEUR_BAS =0;
-        int MOTEUR_FEEDER = 0;
+        int MOTEUR_FEEDER_HAUT = 0;
+        int MOTEUR_FEEDER_BAS = 0;
         int MOTEUR_LEVER_GOBEUR = 0;
         int MOTEUR_GRIMPEUR_WINCH = 0;
         int MOTEUR_GRIMPEUR = 0;
@@ -51,9 +52,8 @@ public interface Constants {
         int CAPTEUR_DEUX = 1;
         int CAPTEUR_TROIS = 2;
         int CAPTEUR_QUATRE = 3;
-        int CAPTEUR_CINQ = 4;
-        int CAPTEUR_REST = 5;
-        int CAPTEUR_LANCEUR = 6;
+
+        int LIMIT_SWITCH_GRIMPEUR = 4;
         
     }
     public interface ANALOG {
