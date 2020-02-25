@@ -19,36 +19,7 @@ import frc.robot.subsystems.Lanceur;
  */
 public class AutonomousCommands {
 
-    public static Command autonomousStraightCommand(Drivetrain drivetrain, Lanceur lanceur, Feeder feeder){
-        return new SequentialCommandGroup(TrajectoryCommands.getCommand(TrajectoryCommands.trajectoryStraight(), drivetrain),
-                                          new ActiverDesactiverLanceurCommand(lanceur),
-                                          new LancerUnBallonCommand(feeder),
-                                          new LancerUnBallonCommand(feeder),
-                                          new LancerUnBallonCommand(feeder),
-                                          new ActiverDesactiverLanceurCommand(lanceur),
-                                          TrajectoryCommands.getCommand(TrajectoryCommands.trajectoryStraightSuite(), drivetrain)
-                                          );
-    }
-    public static Command autonomousRightCommand(Drivetrain drivetrain, Lanceur lanceur, Feeder feeder){
-        return new SequentialCommandGroup(TrajectoryCommands.getCommand(TrajectoryCommands.trajectoryStraight(), drivetrain),
-                                          new ActiverDesactiverLanceurCommand(lanceur),
-                                          new LancerUnBallonCommand(feeder),
-                                          new LancerUnBallonCommand(feeder),
-                                          new LancerUnBallonCommand(feeder),
-                                          new ActiverDesactiverLanceurCommand(lanceur),
-                                          TrajectoryCommands.getCommand(TrajectoryCommands.trajectoryStraightSuite(), drivetrain)
-                                          );
-    }
-    public static Command autonomousLeftCommand(Drivetrain drivetrain, Lanceur lanceur, Feeder feeder){
-        return new SequentialCommandGroup(TrajectoryCommands.getCommand(TrajectoryCommands.trajectoryStraight(), drivetrain),
-                                          new ActiverDesactiverLanceurCommand(lanceur),
-                                          new LancerUnBallonCommand(feeder),
-                                          new LancerUnBallonCommand(feeder),
-                                          new LancerUnBallonCommand(feeder),
-                                          new ActiverDesactiverLanceurCommand(lanceur),
-                                          TrajectoryCommands.getCommand(TrajectoryCommands.trajectoryStraightSuite(), drivetrain)
-                                          );
-    }
+    
     public static Command autonomousTestCommand(Drivetrain drivetrain, Lanceur lanceur, Feeder feeder){
         return new SequentialCommandGroup(new AvancerPiedsCommand(drivetrain, 3.5),
                                           new WaitCommand(1),
