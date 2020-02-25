@@ -33,18 +33,18 @@ public interface Constants {
         
     }
     public interface CAN {
-        int MOTEUR_AVANT_DROIT = 3;
-        int MOTEUR_AVANT_GAUCHE = 2;
-        int MOTEUR_ARRIERE_DROIT = 4;
-        int MOTEUR_ARRIERE_GAUCHE = 10;
-        int GOBEUR = 0;
-        int MOTEUR_LANCEUR_HAUT = 0;
-        int MOTEUR_LANCEUR_BAS =0;
-        int MOTEUR_FEEDER_HAUT = 0;
-        int MOTEUR_FEEDER_BAS = 0;
-        int MOTEUR_LEVER_GOBEUR = 0;
-        int MOTEUR_GRIMPEUR_WINCH = 0;
-        int MOTEUR_GRIMPEUR = 0;
+        int MOTEUR_AVANT_DROIT = 30;
+        int MOTEUR_AVANT_GAUCHE = 33;
+        int MOTEUR_ARRIERE_DROIT = 32;
+        int MOTEUR_ARRIERE_GAUCHE = 31;
+        int GOBEUR = 3;
+        int MOTEUR_LANCEUR_LEFT = 4;
+        int MOTEUR_LANCEUR_RIGHT = 5;
+        int MOTEUR_FEEDER_BAS = 6;
+        int MOTEUR_FEEDER_HAUT = 7;
+        int MOTEUR_GRIMPEUR = 8;
+        int MOTEUR_LEVER_GOBEUR = 20;
+        int MOTEUR_GRIMPEUR_WINCH = 21;
         
     }
     public interface DIO {
