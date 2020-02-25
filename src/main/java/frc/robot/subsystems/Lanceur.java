@@ -26,8 +26,8 @@ public class Lanceur extends SubsystemBase {
   
 
   public Lanceur() {
-    lanceurHaut = new TalonSRX(Constants.CAN.MOTEUR_LANCEUR_HAUT);
-    lanceurBas = new TalonSRX(Constants.CAN.MOTEUR_LANCEUR_BAS);
+    lanceurHaut = new TalonSRX(Constants.CAN.MOTEUR_LANCEUR_RIGHT);
+    lanceurBas = new TalonSRX(Constants.CAN.MOTEUR_LANCEUR_LEFT);
     
     lanceurBas.setNeutralMode(NeutralMode.Brake);
     lanceurHaut.setNeutralMode(NeutralMode.Brake);
