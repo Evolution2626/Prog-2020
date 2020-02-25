@@ -44,10 +44,10 @@ public class Drivetrain extends SubsystemBase {
     arriereDroit = new CANSparkMax(Constants.CAN.MOTEUR_ARRIERE_DROIT, MotorType.kBrushless);
     arriereGauche = new CANSparkMax(Constants.CAN.MOTEUR_ARRIERE_GAUCHE, MotorType.kBrushless);
 
-    avantDroit.setIdleMode(IdleMode.kBrake);
-    avantGauche.setIdleMode(IdleMode.kBrake);
-    arriereDroit.setIdleMode(IdleMode.kBrake);
-    arriereGauche.setIdleMode(IdleMode.kBrake);
+    avantDroit.setIdleMode(IdleMode.kCoast);
+    avantGauche.setIdleMode(IdleMode.kCoast);
+    arriereDroit.setIdleMode(IdleMode.kCoast);
+    arriereGauche.setIdleMode(IdleMode.kCoast);
 
     avantDroit.setClosedLoopRampRate(.5);
     avantGauche.setClosedLoopRampRate(.5);
@@ -70,6 +70,22 @@ public class Drivetrain extends SubsystemBase {
 
     setAllCurrentLimit(20, 15);
 
+    avantDroit.getPIDController().setP(1);
+    arriereDroit.getPIDController().setP(1);
+    avantGauche.getPIDController().setP(1);
+    arriereGauche.getPIDController().setP(1);
+
+    avantDroit.getPIDController().setI(0);
+    arriereDroit.getPIDController().setI(0);
+    avantGauche.getPIDController().setI(0);
+    arriereGauche.getPIDController().setI(0);
+
+    avantDroit.getPIDController().setD(0);
+    arriereDroit.getPIDController().setD(0);
+    avantGauche.getPIDController().setD(0);
+    arriereGauche.getPIDController().setD(0);
+
+
     resetEncoder();
 
     odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(getHeading()));
@@ -85,6 +101,8 @@ public class Drivetrain extends SubsystemBase {
   public void driveTank(double gauche, double droite){
     arriereDroit.set(droite);
     arriereGauche.set(gauche);
+    //System.out.println(" Vitesse" + droite + "   " + gauche);
+    System.out.println(" Output Current" + arriereDroit.getOutputCurrent() + "  " + arriereGauche.getOutputCurrent());
   }
 
   public void driveTankVolts(double gauche, double droite){
