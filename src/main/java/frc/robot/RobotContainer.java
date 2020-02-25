@@ -69,9 +69,6 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
     SmartDashboard.putNumber("Autonomous Wait", 0);
-    chooser.addOption("Straight", new SequentialCommandGroup(new WaitAutonomousTimerCommand(), AutonomousCommands.autonomousStraightCommand(drivetrain, lanceur, feeder)));
-    chooser.addOption("Right", new SequentialCommandGroup(new WaitAutonomousTimerCommand(), AutonomousCommands.autonomousRightCommand(drivetrain, lanceur, feeder)));
-    chooser.addOption("Left", new SequentialCommandGroup(new WaitAutonomousTimerCommand(), AutonomousCommands.autonomousLeftCommand(drivetrain, lanceur, feeder)));
     chooser.addOption("AvancerPieds", new AvancerPiedsCommand(drivetrain, 6));
     chooser.addOption("Tourner 180", new TournerGyroCommand(drivetrain, 90));
     chooser.addOption("Autonomous Test", AutonomousCommands.autonomousTestCommand(drivetrain, lanceur, feeder));
@@ -79,6 +76,7 @@ public class RobotContainer {
     SmartDashboard.putData("Auto Choice", chooser);
     drivetrain.setDefaultCommand(new DrivetrainDriveCommand(drivetrain, driverController));
     lanceur.setDefaultCommand(new LanceurCommand(lanceur));
+    feeder.setDefaultCommand(new FeederTournerBasCommand(feeder));
   }
 
   /**
@@ -93,7 +91,7 @@ public class RobotContainer {
     new JoystickButton(driverController, Button.kA.value).whenPressed(new ActiverDesactiverSlowModeCommand(drivetrain));
     new JoystickButton(coDriverController, Button.kX.value).whileHeld(new FeederTournerHautBasCommand(feeder));
     new JoystickButton(coDriverController, Button.kA.value).whenPressed(new ActiverDesactiverLanceurCommand(lanceur));
-    new DigitalInputButton(feeder.getCapteurRaw(0)).whileHeld(new FeederMonterUnBallonCommand(feeder));
+    new DigitalInputButton(feeder.getCapteurRaw(0)).whenPressed(new FeederMonterUnBallonCommand(feeder));
     new JoystickButton(coDriverController, Button.kY.value).whenPressed(new MonterGrimpeurCommand(grimpeur));
     new JoystickButton(coDriverController, Button.kB.value).whileHeld(new DescendreGrimpeurCommand(grimpeur));
 
