@@ -28,6 +28,8 @@ public class AvancerPiedsCommand extends CommandBase {
     this.pieds = pieds;
     addRequirements(drivetrain);
     toursEncoder = pieds / Constants.ROBOT_CHARACTERIZATION.encoderConstantPieds;
+    doubleCoerce = new Range.DoubleCoerce();
+
   }
 
   private double PID(double value, double P){
@@ -53,9 +55,9 @@ public class AvancerPiedsCommand extends CommandBase {
     double speedDroit = PID(drivetrain.getRightEncodersPosition()*Constants.ROBOT_CHARACTERIZATION.encoderConstantPieds, .2);
     double speedGauche = PID(drivetrain.getLeftEncodersPosition()*Constants.ROBOT_CHARACTERIZATION.encoderConstantPieds, .2);
     double alignement = PID((drivetrain.getRightEncodersPosition()-drivetrain.getLeftEncodersPosition())* Constants.ROBOT_CHARACTERIZATION.encoderConstantPieds, .2);
-    speedDroit -= alignement;
-    speedGauche += alignement;
-    doubleCoerce = new Range.DoubleCoerce(speedGauche, speedDroit, .5);
+    //speedDroit -= alignement;
+    //speedGauche += alignement;
+    doubleCoerce.setSpeed(speedGauche, speedDroit, .5);
     drivetrain.driveTank(doubleCoerce.getSpeedLeft(), doubleCoerce.getSpeedRight());
   }
 
