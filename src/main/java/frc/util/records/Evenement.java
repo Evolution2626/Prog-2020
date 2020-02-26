@@ -14,7 +14,7 @@ public class Evenement {
     public double elapsedTime;
     public String description;
 
-    public Evenement(double elapsedTime, String description){
+    public Evenement(String description, double elapsedTime){
         this.elapsedTime = elapsedTime;
         this.description = description;
     }

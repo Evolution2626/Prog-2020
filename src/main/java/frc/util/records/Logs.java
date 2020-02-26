@@ -23,11 +23,11 @@ public class Logs {
 
 
     public static void addEvenement(double elapsedTime, String description){
-        evenements.add(new Evenement(elapsedTime, description));
+        evenements.add(new Evenement(description, elapsedTime));
 
     }
     public static void addEvenement(String description){
-        evenements.add(new Evenement(Timer.getMatchTime() , description));
+        evenements.add(new Evenement(description, Timer.getMatchTime()));
 
     }
 
