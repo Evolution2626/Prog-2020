@@ -43,7 +43,7 @@ public interface Constants {
         int MOTEUR_FEEDER_BAS = 6;
         int MOTEUR_FEEDER_HAUT = 7;
         int MOTEUR_GRIMPEUR = 8;
-        int MOTEUR_LEVER_GOBEUR = 20;
+        int MOTEUR_LEVER_GOBEUR = 10;
         int MOTEUR_GRIMPEUR_WINCH = 21;
         
     }
