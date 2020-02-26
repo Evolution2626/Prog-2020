@@ -62,12 +62,16 @@ public class Range{
         private double speedRight;
         private double maxSpeed;
 
-        public DoubleCoerce(double speedLeft, double speedRight, double maxSpeed){
+        public DoubleCoerce(){
+           
+        }
+
+
+        public void setSpeed(double speedLeft, double speedRight, double maxSpeed){
             this.speedLeft = speedLeft;
             this.speedRight = speedRight;
             this.maxSpeed = maxSpeed;
         }
-
 
         public double getSpeedLeft(){
             if (Math.abs(speedLeft) > maxSpeed) {
