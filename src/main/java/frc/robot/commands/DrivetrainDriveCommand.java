@@ -12,6 +12,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.RobotState;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Drivetrain;
@@ -48,9 +49,12 @@ public class DrivetrainDriveCommand extends CommandBase {
       speedGauche = Math.pow(speedGauche, 3);
       if (!drivetrain.getSlowMode() || controller.getBumper(Hand.kRight)) {
         drivetrain.driveTank(speedGauche, speedDroit);
-        
+        controller.setRumble(RumbleType.kRightRumble, 0);
+        controller.setRumble(RumbleType.kLeftRumble, 0);
       }else {
         drivetrain.driveTank(speedGauche * .5, speedDroit * .5);
+        controller.setRumble(RumbleType.kRightRumble, .5);
+        controller.setRumble(RumbleType.kLeftRumble, .5);
       }
     }
     
