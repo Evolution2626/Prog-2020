@@ -27,7 +27,7 @@ public class AutonomousCommands {
                                           new WaitCommand(1),
                                           new AvancerPiedsCommand(drivetrain, 3.5),
                                           new WaitCommand(1),
-                                          new TournerGyroCommand(drivetrain, 90),
+                                          /*new TournerGyroCommand(drivetrain, 90),
                                           new WaitCommand(1),
                                           new AvancerPiedsCommand(drivetrain, 7),
                                           new WaitCommand(1),
@@ -38,7 +38,7 @@ public class AutonomousCommands {
                                           new TournerGyroCommand(drivetrain, 90),
                                           new WaitCommand(1),
                                           new AvancerPiedsCommand(drivetrain, 3.5),
-                                          new WaitCommand(1),
+                                          new WaitCommand(1),*/
                                           new StopDrivetrainMotorsCommand(drivetrain) 
                                           );
     }
