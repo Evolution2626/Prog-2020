@@ -27,6 +27,7 @@ import frc.robot.commands.FeederTournerBasCommand;
 import frc.robot.commands.FeederTournerHautBasCommand;
 import frc.robot.commands.GobeurCommand;
 import frc.robot.commands.LanceurCommand;
+import frc.robot.commands.MonterGobeurCommand;
 import frc.robot.commands.MonterGrimpeurCommand;
 import frc.robot.commands.TournerGyroCommand;
 import frc.robot.commands.WaitAutonomousTimerCommand;
@@ -94,6 +95,7 @@ public class RobotContainer {
     new DigitalInputButton(feeder.getCapteurRaw(0)).whenPressed(new FeederMonterUnBallonCommand(feeder));
     new JoystickButton(coDriverController, Button.kY.value).whenPressed(new MonterGrimpeurCommand(grimpeur));
     new JoystickButton(coDriverController, Button.kB.value).whileHeld(new DescendreGrimpeurCommand(grimpeur));
+    new JoystickButton(coDriverController, Button.kStart.value).whileHeld(new MonterGobeurCommand(gobeur, coDriverController));
 
     }
 
