@@ -10,6 +10,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drivetrain;
 import frc.util.Range;
+import frc.util.records.Logs;
 
 public class TournerGyroCommand extends CommandBase {
   /**
@@ -53,6 +54,7 @@ public class TournerGyroCommand extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     drivetrain.driveTank(0, 0);
+    Logs.addEvenement("Robot a tourné de " + angle + " degrées");
   }
 
   // Returns true when the command should end.

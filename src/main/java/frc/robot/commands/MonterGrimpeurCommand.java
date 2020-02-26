@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Grimpeur;
+import frc.util.records.Logs;
 
 public class MonterGrimpeurCommand extends CommandBase {
   /**
@@ -36,6 +37,7 @@ public class MonterGrimpeurCommand extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     grimpeur.setMonteurSpeed(0);
+    Logs.addEvenement("Grimpeur a monté");
   }
 
   // Returns true when the command should end.

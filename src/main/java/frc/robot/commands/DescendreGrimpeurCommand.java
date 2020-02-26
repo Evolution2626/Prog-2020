@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Grimpeur;
+import frc.util.records.Logs;
 
 public class DescendreGrimpeurCommand extends CommandBase {
   /**
@@ -36,6 +37,7 @@ public class DescendreGrimpeurCommand extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     grimpeur.setWinchSpeed(0);
+    Logs.addEvenement("grimpeur descendu");
   }
 
   // Returns true when the command should end.

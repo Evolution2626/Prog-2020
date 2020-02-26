@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Gobeur;
+import frc.util.records.Logs;
 
 public class GobeurCommand extends CommandBase {
   /**
@@ -28,6 +29,7 @@ public class GobeurCommand extends CommandBase {
   @Override
   public void initialize() {
     gobeur.setSpeed(speed);
+    Logs.addEvenement("Gobeur commence à tourner");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -39,6 +41,7 @@ public class GobeurCommand extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     gobeur.setSpeed(0);
+    Logs.addEvenement("Gobeur a fini de tourner");
   }
 
   // Returns true when the command should end.

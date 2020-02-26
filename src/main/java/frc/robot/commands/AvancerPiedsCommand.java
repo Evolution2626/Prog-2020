@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Drivetrain;
 import frc.util.Range;
+import frc.util.records.Logs;
 
 public class AvancerPiedsCommand extends CommandBase {
   /**
@@ -65,6 +66,7 @@ public class AvancerPiedsCommand extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     drivetrain.driveTank(0, 0);
+    Logs.addEvenement("Avancer de " + pieds + " pieds");
   }
 
   // Returns true when the command should end.
