@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Feeder;
+import frc.robot.subsystems.Gobeur;
 import frc.robot.subsystems.Lanceur;
 
 /**
@@ -27,7 +28,7 @@ public class AutonomousCommands {
                                           new WaitCommand(1),
                                           new AvancerPiedsCommand(drivetrain, 3.5),
                                           new WaitCommand(1),
-                                          /*new TournerGyroCommand(drivetrain, 90),
+                                          new TournerGyroCommand(drivetrain, 90),
                                           new WaitCommand(1),
                                           new AvancerPiedsCommand(drivetrain, 7),
                                           new WaitCommand(1),
@@ -38,7 +39,7 @@ public class AutonomousCommands {
                                           new TournerGyroCommand(drivetrain, 90),
                                           new WaitCommand(1),
                                           new AvancerPiedsCommand(drivetrain, 3.5),
-                                          new WaitCommand(1),*/
+                                          new WaitCommand(1),
                                           new StopDrivetrainMotorsCommand(drivetrain) 
                                           );
     }
@@ -52,6 +53,17 @@ public class AutonomousCommands {
                                           new TournerGyroCommand(drivetrain, -180),
                                           new StopDrivetrainMotorsCommand(drivetrain) 
                                           );
+    }
+
+    public static Command avanceDroitAndShoot(Drivetrain drivetrain, Lanceur lanceur, Feeder feeder, Gobeur gobeur){
+        return new SequentialCommandGroup(  new MonterGobeurCommand(gobeur),
+                                            new AvancerPiedsCommand(drivetrain, 3),
+                                            new ActiverDesactiverLanceurCommand(lanceur),
+                                            new WaitCommand(1),
+                                            new FeederTournerHautBasCommand(feeder),
+                                            new WaitCommand(3),
+                                            new AvancerPiedsCommand(drivetrain, -6));
+
     }
 
 }
