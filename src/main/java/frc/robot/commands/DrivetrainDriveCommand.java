@@ -47,14 +47,11 @@ public class DrivetrainDriveCommand extends CommandBase {
       double speedGauche = -controller.getRawAxis(Constants.AXES.AXES_GAUCHE);
       speedGauche = Range.threshold(.1, speedGauche);
       speedGauche = Math.pow(speedGauche, 3);
-      if (!drivetrain.getSlowMode() || controller.getBumper(Hand.kRight)) {
+      if (!drivetrain.getSlowMode() || !controller.getBumper(Hand.kLeft)) {
         drivetrain.driveTank(speedGauche, speedDroit);
-        controller.setRumble(RumbleType.kRightRumble, 0);
-        controller.setRumble(RumbleType.kLeftRumble, 0);
       }else {
         drivetrain.driveTank(speedGauche * .5, speedDroit * .5);
-        controller.setRumble(RumbleType.kRightRumble, .5);
-        controller.setRumble(RumbleType.kLeftRumble, .5);
+        
       }
     }
     

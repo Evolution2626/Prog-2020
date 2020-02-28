@@ -44,7 +44,7 @@ public interface Constants {
         int MOTEUR_FEEDER_HAUT = 7;
         int MOTEUR_GRIMPEUR = 8;
         int MOTEUR_LEVER_GOBEUR = 10;
-        int MOTEUR_GRIMPEUR_WINCH = 21;
+        int MOTEUR_GRIMPEUR_WINCH = 12;
         
     }
     public interface DIO {
@@ -67,7 +67,7 @@ public interface Constants {
 
     public interface SPEED {
         double FEEDER_SPEED = .2;
-        double LANCEUR_SPEED = .5;
+        double LANCEUR_SPEED = .7;
         double GOBEUR_SPEED = .6;
     }
 
