@@ -23,6 +23,7 @@ public class Gobeur extends SubsystemBase {
    */
   private TalonSRX gobeur;
   private CANSparkMax monteurGobeur;
+  private boolean isGobeurDown = false;
 
   public Gobeur() {
     gobeur = new TalonSRX(Constants.CAN.GOBEUR);
@@ -30,6 +31,8 @@ public class Gobeur extends SubsystemBase {
 
     monteurGobeur.setIdleMode(IdleMode.kBrake);
     gobeur.setNeutralMode(NeutralMode.Brake);
+
+    resetEncoder();
   }
   public void setSpeed(double speed){
     gobeur.set(ControlMode.PercentOutput, speed);
@@ -39,6 +42,25 @@ public class Gobeur extends SubsystemBase {
     monteurGobeur.set(speed);
   }
 
+  public void setGobeurPos(boolean state){
+    isGobeurDown = state;
+  }
+
+  public void setMonteurGobeurMode(IdleMode mode){
+    monteurGobeur.setIdleMode(mode);
+  }
+
+  public boolean isGobeurDown(){
+    return isGobeurDown;
+  }
+
+  public double getEncoderPosition(){
+    return monteurGobeur.getEncoder().getPosition();
+  }
+
+  public void resetEncoder(){
+    monteurGobeur.getEncoder().setPosition(0);
+  }
 
   @Override
   public void periodic() {

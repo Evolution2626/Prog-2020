@@ -7,6 +7,8 @@
 
 package frc.robot.commands;
 
+import com.revrobotics.CANSparkMax.IdleMode;
+
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
@@ -18,11 +20,12 @@ public class MonterGobeurCommand extends CommandBase {
    * Creates a new MonterGobeur.
    */
   Gobeur gobeur;
-  XboxController controller;
-  public MonterGobeurCommand(Gobeur gobeur, XboxController controller){
+  double positionUp = 0;
+  double positionDown = 0;
+
+  public MonterGobeurCommand(Gobeur gobeur){
     // Use addRequirements() here to declare subsystem dependencies.
     this.gobeur = gobeur;
-    this.controller = controller;
     addRequirements(gobeur);
   }
 
@@ -34,18 +37,30 @@ public class MonterGobeurCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    gobeur.setSpeedMonteur(Range.threshold(.1, controller.getRawAxis(Constants.AXES.AXES_GAUCHE)));
+    if (gobeur.isGobeurDown()) {
+      gobeur.setMonteurGobeurMode(IdleMode.kBrake);
+      gobeur.setSpeedMonteur(Range.coerce(-.5, .5, positionUp - gobeur.getEncoderPosition()));
+    } else {
+      gobeur.setMonteurGobeurMode(IdleMode.kCoast);
+      gobeur.setSpeedMonteur(Range.coerce(-.5, .5, positionDown - gobeur.getEncoderPosition()));
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     gobeur.setSpeedMonteur(0);
+    gobeur.setGobeurPos(!gobeur.isGobeurDown());
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    if (gobeur.isGobeurDown()) {
+      return gobeur.getEncoderPosition() <= positionUp;
+    } else{
+      return gobeur.getEncoderPosition() >= positionDown;
+    }
+    
   }
 }

@@ -69,10 +69,6 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
     SmartDashboard.putNumber("Autonomous Wait", 0);
-    chooser.addOption("AvancerPieds", new AvancerPiedsCommand(drivetrain, 6));
-    chooser.addOption("Tourner 180", new TournerGyroCommand(drivetrain, 90));
-    chooser.addOption("Autonomous Test", AutonomousCommands.autonomousTestCommand(drivetrain, lanceur, feeder));
-    chooser.addOption("Autonomous Rotate Test", AutonomousCommands.autonomousRotateTestCommand(drivetrain, lanceur, feeder));
     SmartDashboard.putData("Auto Choice", chooser);
     drivetrain.setDefaultCommand(new DrivetrainDriveCommand(drivetrain, driverController));
     lanceur.setDefaultCommand(new LanceurCommand(lanceur));
@@ -91,7 +87,7 @@ public class RobotContainer {
     new JoystickButton(coDriverController, Button.kX.value).whileHeld(new FeederTournerHautBasCommand(feeder));
     new JoystickButton(coDriverController, Button.kA.value).whenPressed(new ActiverDesactiverLanceurCommand(lanceur));
     new DigitalInputButton(feeder.getCapteurRaw(0)).whenPressed(new FeederMonterUnBallonCommand(feeder));
-    new JoystickButton(coDriverController, Button.kStart.value).whileHeld(new MonterGobeurCommand(gobeur, coDriverController));
+    new JoystickButton(coDriverController, Button.kStart.value).whenPressed(new MonterGobeurCommand(gobeur));
     new JoystickButton(driverController, Button.kA.value).whileHeld(new MonterGrimpeurCommand(grimpeur));
     new JoystickButton(driverController, Button.kY.value).whileHeld(new DescendreGrimpeurCommand(grimpeur));
     new JoystickButton(driverController, Button.kB.value).whileHeld(new MonterWinchGrimpeurCommand(grimpeur));
