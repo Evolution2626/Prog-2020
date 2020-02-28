@@ -71,11 +71,14 @@ public class Range{
             this.speedLeft = speedLeft;
             this.speedRight = speedRight;
             this.maxSpeed = maxSpeed;
+            if (speedLeft < 0 && speedRight < 0) {
+                maxSpeed *= -1;
+            }
         }
 
         public double getSpeedLeft(){
             if (Math.abs(speedLeft) > maxSpeed) {
-                if (speedRight > speedLeft){
+                if (Math.abs(speedRight) > Math.abs(speedLeft)){
                     return (speedLeft/speedRight)*maxSpeed;
                 } else {
                     return maxSpeed;
@@ -86,7 +89,7 @@ public class Range{
 
         public double getSpeedRight(){
             if (Math.abs(speedRight) > maxSpeed) {
-                if (speedLeft > speedRight) {
+                if (Math.abs(speedRight) > Math.abs(speedLeft)) {
                     return (speedRight/speedLeft)*maxSpeed;
                 } else {
                     return maxSpeed;
