@@ -11,12 +11,12 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Grimpeur;
 import frc.util.records.Logs;
 
-public class DescendreGrimpeurCommand extends CommandBase {
+public class DescendreWinchCommand extends CommandBase {
   /**
-   * Creates a new MonterGrimpeurCommand.
+   * Creates a new DescendreGrimpeurCommand.
    */
   private Grimpeur grimpeur;
-  public DescendreGrimpeurCommand(Grimpeur grimpeur) {
+  public DescendreWinchCommand(Grimpeur grimpeur) {
     this.grimpeur = grimpeur;
     addRequirements(grimpeur);
     // Use addRequirements() here to declare subsystem dependencies.
@@ -30,19 +30,19 @@ public class DescendreGrimpeurCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    grimpeur.setMonteurSpeed(-.25);
+    grimpeur.setWinchSpeed(-1);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    grimpeur.setMonteurSpeed(0);
-    Logs.addEvenement("Grimpeur a monté");
+    grimpeur.setWinchSpeed(0);
+    Logs.addEvenement("grimpeur descendu");
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;//grimpeur.getLimitSwitchValue();
+    return false;
   }
 }
