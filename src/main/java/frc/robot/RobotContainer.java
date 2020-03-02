@@ -15,9 +15,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.ActivateDeactivateFeederBasCommand;
 import frc.robot.commands.ActiverDesactiverLanceurCommand;
 import frc.robot.commands.AutonomousCommands;
-import frc.robot.commands.AvancerPiedsCommand;
 import frc.robot.commands.DescendreGrimpeurCommand;
 import frc.robot.commands.DescendreWinchCommand;
 import frc.robot.commands.DrivetrainDriveCommand;
@@ -29,7 +29,6 @@ import frc.robot.commands.LanceurCommand;
 import frc.robot.commands.MonterGobeurCommand;
 import frc.robot.commands.MonterGrimpeurCommand;
 import frc.robot.commands.MonterWinchGrimpeurCommand;
-import frc.robot.commands.TournerGyroCommand;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Feeder;
 import frc.robot.subsystems.Gobeur;
@@ -87,11 +86,12 @@ public class RobotContainer {
     new JoystickButton(coDriverController, Button.kX.value).whileHeld(new FeederTournerHautBasCommand(feeder));
     new JoystickButton(coDriverController, Button.kA.value).whenPressed(new ActiverDesactiverLanceurCommand(lanceur));
     new DigitalInputButton(feeder.getCapteurRaw(0)).whenPressed(new FeederMonterUnBallonCommand(feeder));
-    new JoystickButton(coDriverController, Button.kStart.value).whenPressed(new MonterGobeurCommand(gobeur));
+    new JoystickButton(coDriverController, Button.kB.value).whenPressed(new MonterGobeurCommand(gobeur));
     new JoystickButton(driverController, Button.kA.value).whileHeld(new MonterGrimpeurCommand(grimpeur));
     new JoystickButton(driverController, Button.kY.value).whileHeld(new DescendreGrimpeurCommand(grimpeur));
     new JoystickButton(driverController, Button.kB.value).whileHeld(new MonterWinchGrimpeurCommand(grimpeur));
     new JoystickButton(driverController, Button.kX.value).whileHeld(new DescendreWinchCommand(grimpeur));
+    new JoystickButton(coDriverController, Button.kStart.value).whenPressed(new ActivateDeactivateFeederBasCommand(feeder));
   }
 
 

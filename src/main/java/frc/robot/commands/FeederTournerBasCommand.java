@@ -30,7 +30,12 @@ public class FeederTournerBasCommand extends CommandBase {
   @Override
   public void execute() {
     feeder.setSpeedHaut(0);
-    feeder.setSpeedBas(-.8);
+    if (feeder.getAcvtivateBas()) {
+      feeder.setSpeedBas(-.8);
+    }else{
+      feeder.setSpeedBas(0);
+    }
+    
   }
 
   // Called once the command ends or is interrupted.
