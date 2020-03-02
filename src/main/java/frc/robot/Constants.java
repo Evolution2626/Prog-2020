@@ -48,10 +48,9 @@ public interface Constants {
         
     }
     public interface DIO {
-        int CAPTEUR_UN = 0;
-        int CAPTEUR_DEUX = 1;
-        int CAPTEUR_TROIS = 2;
-        int CAPTEUR_QUATRE = 3;
+        int CAPTEUR_DEUX = 11;
+        int CAPTEUR_TROIS = 13;
+        int CAPTEUR_QUATRE = 12;
 
         int LIMIT_SWITCH_GRIMPEUR = 4;
         

@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -21,6 +22,7 @@ public class Feeder extends SubsystemBase {
    */
   private VictorSPX feederHaut;
   private VictorSPX feederBas;
+  private boolean activateBas;
 
   private DigitalInput[] capteurs = new DigitalInput[3];
 
@@ -37,6 +39,14 @@ public class Feeder extends SubsystemBase {
     feederHaut.setNeutralMode(NeutralMode.Brake);
     
 
+  }
+
+  public boolean getAcvtivateBas(){
+    return activateBas;
+  }
+
+  public void setActivateBas(boolean state){
+    activateBas = state;
   }
 
   public void setSpeedHaut(double speed) {
@@ -57,6 +67,10 @@ public class Feeder extends SubsystemBase {
   
   @Override
   public void periodic() {
+    SmartDashboard.putBoolean("Capteur un", capteurs[0].get());
+    SmartDashboard.putBoolean("Capteur deux", capteurs[1].get());
+    SmartDashboard.putBoolean("Capteur trois", capteurs[2].get());
+
     // This method will be called once per scheduler run
   }
 }
