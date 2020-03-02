@@ -44,10 +44,10 @@ public class Drivetrain extends SubsystemBase {
     arriereDroit = new CANSparkMax(Constants.CAN.MOTEUR_ARRIERE_DROIT, MotorType.kBrushless);
     arriereGauche = new CANSparkMax(Constants.CAN.MOTEUR_ARRIERE_GAUCHE, MotorType.kBrushless);
 
-    avantDroit.setIdleMode(IdleMode.kCoast);
-    avantGauche.setIdleMode(IdleMode.kCoast);
-    arriereDroit.setIdleMode(IdleMode.kCoast);
-    arriereGauche.setIdleMode(IdleMode.kCoast);
+    avantDroit.setIdleMode(IdleMode.kBrake);
+    avantGauche.setIdleMode(IdleMode.kBrake);
+    arriereDroit.setIdleMode(IdleMode.kBrake);
+    arriereGauche.setIdleMode(IdleMode.kBrake);
 
     avantDroit.setClosedLoopRampRate(2);
     avantGauche.setClosedLoopRampRate(2);
