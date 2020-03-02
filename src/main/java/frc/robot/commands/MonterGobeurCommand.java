@@ -9,9 +9,7 @@ package frc.robot.commands;
 
 import com.revrobotics.CANSparkMax.IdleMode;
 
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import frc.robot.subsystems.Gobeur;
 import frc.util.Range;
 
@@ -21,7 +19,7 @@ public class MonterGobeurCommand extends CommandBase {
    */
   Gobeur gobeur;
   double positionUp = 0;
-  double positionDown = 0;
+  double positionDown = 40; //41.142442;
 
   public MonterGobeurCommand(Gobeur gobeur){
     // Use addRequirements() here to declare subsystem dependencies.
