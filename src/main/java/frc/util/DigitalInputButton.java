@@ -24,7 +24,7 @@ public class DigitalInputButton extends Button{
 
     @Override
     public boolean get() {
-        return !input.get();
+        return input.get();
     }
 
 }
