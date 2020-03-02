@@ -40,14 +40,14 @@ public class FeederMonterUnBallonCommand extends CommandBase {
         feeder.setSpeedBas(0);
         stop = true;
       }else{
-        feeder.setSpeedHaut(1);
+        feeder.setSpeedHaut(-.3);
         etape = 2;
       }
     }else if (etape == 2) {
       if (feeder.getCapteurValue(1)) {
         feeder.setSpeedBas(0);
       }else{
-        feeder.setSpeedBas(1);
+        feeder.setSpeedBas(-.8);
         etape = 3;
       }
     }else if (etape == 3) {
