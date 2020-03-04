@@ -24,13 +24,15 @@ public class Grimpeur extends SubsystemBase {
    */
   private VictorSPX monteur;
   private CANSparkMax winch;
-  private DigitalInput limitSwitch;
+  private DigitalInput limitSwitchHaut;
+  private DigitalInput limitSwitchBas;
   public Grimpeur() {
     monteur = new VictorSPX(Constants.CAN.MOTEUR_GRIMPEUR);
     winch = new CANSparkMax(Constants.CAN.MOTEUR_GRIMPEUR_WINCH, MotorType.kBrushless);
     winch.setIdleMode(IdleMode.kBrake);
     monteur.setNeutralMode(NeutralMode.Brake);
-    limitSwitch = new DigitalInput(Constants.DIO.LIMIT_SWITCH_GRIMPEUR);
+    limitSwitchHaut = new DigitalInput(Constants.DIO.LIMIT_SWITCH_HAUT_GRIMPEUR);
+    limitSwitchBas = new DigitalInput(Constants.DIO.LIMIT_SWITCH_BAS_GRIMPEUR);
   }
 
   public void setMonteurSpeed(double speed) {
@@ -39,8 +41,11 @@ public class Grimpeur extends SubsystemBase {
   public void setWinchSpeed(double speed) {
     winch.set(speed);
   }
-  public boolean getLimitSwitchValue() {
-    return limitSwitch.get();
+  public boolean getLimitSwitchHautValue() {
+    return limitSwitchHaut.get();
+  }
+  public boolean getLimitSwitchBasValue() {
+    return limitSwitchBas.get();
   }
 
   @Override
