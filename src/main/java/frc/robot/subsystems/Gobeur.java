@@ -24,7 +24,6 @@ public class Gobeur extends SubsystemBase {
    */
   private TalonSRX gobeur;
   private CANSparkMax monteurGobeur;
-  private boolean isGobeurDown = false;
 
   public Gobeur() {
     gobeur = new TalonSRX(Constants.CAN.GOBEUR);
@@ -43,9 +42,7 @@ public class Gobeur extends SubsystemBase {
     monteurGobeur.set(speed);
   }
 
-  public void setGobeurPos(boolean state){
-    isGobeurDown = state;
-  }
+  
 
   public void setMonteurGobeurMode(IdleMode mode){
     monteurGobeur.setIdleMode(mode);
