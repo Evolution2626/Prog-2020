@@ -69,6 +69,6 @@ public class AvancerPiedsCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return (drivetrain.getLeftEncodersPosition() + drivetrain.getRightEncodersPosition()) / 2 >= toursEncoder;
+    return Math.abs((drivetrain.getLeftEncodersPosition() + drivetrain.getRightEncodersPosition()) / 2) >= Math.abs(toursEncoder);
   }
 }
