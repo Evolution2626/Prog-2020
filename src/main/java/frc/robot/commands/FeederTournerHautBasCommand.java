@@ -15,8 +15,10 @@ public class FeederTournerHautBasCommand extends CommandBase {
    * Creates a new FeederTournerHautBasCommand.
    */
   private Feeder feeder;
-  public FeederTournerHautBasCommand(Feeder feeder) {
+  private double speed;
+  public FeederTournerHautBasCommand(Feeder feeder, double speed) {
     this.feeder = feeder;
+    this.speed = speed;
     addRequirements(feeder);
   }
 
@@ -28,8 +30,8 @@ public class FeederTournerHautBasCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    feeder.setSpeedBas(-1);
-    feeder.setSpeedHaut(-1);
+    feeder.setSpeedBas(speed);
+    feeder.setSpeedHaut(speed);
   }
 
   // Called once the command ends or is interrupted.
