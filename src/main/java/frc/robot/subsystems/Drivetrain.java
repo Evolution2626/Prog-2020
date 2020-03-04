@@ -30,7 +30,6 @@ public class Drivetrain extends SubsystemBase {
   private CANSparkMax avantGauche;
   private CANSparkMax arriereDroit;
   private CANSparkMax arriereGauche;
-  public boolean slowMode = false;
   
 
   public Gyro gyro = new ADXRS450_Gyro();
@@ -166,27 +165,14 @@ public class Drivetrain extends SubsystemBase {
     return new DifferentialDriveWheelSpeeds(getLeftEncodersRate(), getRightEncodersRate());
   }
 
-  public void setSlowMode(boolean state){
-    slowMode = state;
-  }
-
-  public boolean getSlowMode(){
-    return slowMode;
-  }
-
   
   
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
     odometry.update(Rotation2d.fromDegrees(getHeading()), getLeftEncodersPosition(), getRightEncodersPosition());
-    SmartDashboard.putBoolean("Slow Mode", getSlowMode());
     SmartDashboard.putNumber("Encoder Left", getLeftEncodersPosition());
     SmartDashboard.putNumber("Encoder Right", getRightEncodersPosition());
-    SmartDashboard.putNumber("Encoder 1", avantDroit.getEncoder().getPosition());
-    SmartDashboard.putNumber("Encoder 2", avantGauche.getEncoder().getPosition());
-    SmartDashboard.putNumber("Encoder 3", arriereDroit.getEncoder().getPosition());
-    SmartDashboard.putNumber("Encoder 4", arriereGauche.getEncoder().getPosition());
     SmartDashboard.putNumber("GyroAngle", getGyroAngle());
 
   }

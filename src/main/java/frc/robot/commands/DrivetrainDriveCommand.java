@@ -46,10 +46,10 @@ public class DrivetrainDriveCommand extends CommandBase {
       double speedGauche = -controller.getRawAxis(Constants.AXES.AXES_GAUCHE);
       speedGauche = Range.threshold(.1, speedGauche);
       speedGauche = Math.pow(speedGauche, 3);
-      if (!drivetrain.getSlowMode() || !controller.getBumper(Hand.kLeft)) {
-        drivetrain.driveTank(speedGauche, speedDroit);
-      }else {
+      if (controller.getBumper(Hand.kLeft)) {
         drivetrain.driveTank(speedGauche * .5, speedDroit * .5);
+      }else {
+        drivetrain.driveTank(speedGauche, speedDroit);
         
       }
     }
