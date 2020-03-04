@@ -52,11 +52,18 @@ public class Gobeur extends SubsystemBase {
   }
 
   public boolean isGobeurDown(){
-    return isGobeurDown;
+    if (getEncoderPosition() <= 5) {
+      return false;
+    }
+    return true;
   }
 
   public double getEncoderPosition(){
     return monteurGobeur.getEncoder().getPosition();
+  }
+
+  public void setEncoderPosition(double position){
+    monteurGobeur.getEncoder().setPosition(position);
   }
 
   public void resetEncoder(){
@@ -67,5 +74,7 @@ public class Gobeur extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("Encodeur Gobeur", getEncoderPosition());
+    SmartDashboard.putBoolean("GobPos", isGobeurDown());
+
   }
 }
