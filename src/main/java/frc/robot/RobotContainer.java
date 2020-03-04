@@ -10,14 +10,15 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
-import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ActivateDeactivateFeederBasCommand;
 import frc.robot.commands.ActiverDesactiverLanceurCommand;
 import frc.robot.commands.AutonomousCommands;
+import frc.robot.commands.AvancerPiedsCommand;
 import frc.robot.commands.DescendreGrimpeurCommand;
 import frc.robot.commands.DescendreWinchCommand;
 import frc.robot.commands.DrivetrainDriveCommand;
@@ -29,6 +30,10 @@ import frc.robot.commands.LanceurCommand;
 import frc.robot.commands.MonterGobeurCommand;
 import frc.robot.commands.MonterGrimpeurCommand;
 import frc.robot.commands.MonterWinchGrimpeurCommand;
+import frc.robot.commands.SetGobeurEncoderPosCommand;
+import frc.robot.commands.WaitAutonomousTimerCommand;
+import frc.robot.commands.AutonomousCommands.EndPosition;
+import frc.robot.commands.AutonomousCommands.StartPosition;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Feeder;
 import frc.robot.subsystems.Gobeur;
@@ -59,7 +64,9 @@ public class RobotContainer {
 
   private final XboxController coDriverController = new XboxController(Constants.USB.CO_DRIVER_GAMEPAD);
 
-  private SendableChooser<Command> chooser = new SendableChooser<>();
+  private SendableChooser<StartPosition> chooserStart = new SendableChooser<>();
+  private SendableChooser<EndPosition> chooserEnd = new SendableChooser<>();
+
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -68,7 +75,14 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
     SmartDashboard.putNumber("Autonomous Wait", 0);
-    SmartDashboard.putData("Auto Choice", chooser);
+    chooserStart.addOption("Straight Start", StartPosition.centre);
+    chooserStart.addOption("Right Start", StartPosition.droite);
+    chooserStart.addOption("Left Start", StartPosition.gauche);
+    chooserEnd.addOption("Ballon End", EndPosition.ballon);
+    chooserEnd.addOption("Right End", EndPosition.droite);
+    chooserEnd.addOption("Left End", EndPosition.gauche);
+    SmartDashboard.putData("Auto Start", chooserStart);
+    SmartDashboard.putData("Auto End", chooserEnd);
     drivetrain.setDefaultCommand(new DrivetrainDriveCommand(drivetrain, driverController));
     lanceur.setDefaultCommand(new LanceurCommand(lanceur));
     feeder.setDefaultCommand(new FeederTournerBasCommand(feeder));
@@ -83,7 +97,8 @@ public class RobotContainer {
   private void configureButtonBindings() {
     new JoystickButton(coDriverController, Button.kBumperRight.value).whileHeld(new GobeurCommand(gobeur, Constants.SPEED.GOBEUR_SPEED));
     new JoystickButton(coDriverController, Button.kBumperLeft.value).whileHeld(new GobeurCommand(gobeur, -Constants.SPEED.GOBEUR_SPEED));
-    new JoystickButton(coDriverController, Button.kX.value).whileHeld(new FeederTournerHautBasCommand(feeder));
+    new JoystickButton(coDriverController, Button.kX.value).whileHeld(new FeederTournerHautBasCommand(feeder, -1));
+    new JoystickButton(coDriverController, Button.kY.value).whileHeld(new FeederTournerHautBasCommand(feeder, 1));
     new JoystickButton(coDriverController, Button.kA.value).whenPressed(new ActiverDesactiverLanceurCommand(lanceur));
     new DigitalInputButton(feeder.getCapteurRaw(0)).whenPressed(new FeederMonterUnBallonCommand(feeder));
     new JoystickButton(coDriverController, Button.kB.value).whenPressed(new MonterGobeurCommand(gobeur));
@@ -92,6 +107,8 @@ public class RobotContainer {
     new JoystickButton(driverController, Button.kB.value).whileHeld(new MonterWinchGrimpeurCommand(grimpeur));
     new JoystickButton(driverController, Button.kX.value).whileHeld(new DescendreWinchCommand(grimpeur));
     new JoystickButton(coDriverController, Button.kStart.value).whenPressed(new ActivateDeactivateFeederBasCommand(feeder));
+    new JoystickButton(driverController, Button.kStart.value).whenPressed(new AvancerPiedsCommand(drivetrain, -1.2));
+    new JoystickButton(coDriverController, Button.kBack.value).whenPressed(new SetGobeurEncoderPosCommand(gobeur, 38));
   }
 
 
@@ -103,7 +120,6 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
     drivetrain.resetEncoder();
-    drivetrain.resetOdometry(new Pose2d());
-    return chooser.getSelected();
+    return new SequentialCommandGroup(new WaitAutonomousTimerCommand(), AutonomousCommands.autonomous(drivetrain, lanceur, feeder, gobeur, chooserStart.getSelected(), chooserEnd.getSelected()));
   }
 }
