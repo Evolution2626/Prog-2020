@@ -29,7 +29,7 @@ public interface Constants {
         int AXES_DROITE = 5;
 
     }
-    public interface PWN {
+    public interface PWM {
         
     }
     public interface CAN {
@@ -52,8 +52,8 @@ public interface Constants {
         int CAPTEUR_TROIS = 13;
         int CAPTEUR_QUATRE = 12;
 
-        int LIMIT_SWITCH_GRIMPEUR = 4;
-        
+        int LIMIT_SWITCH_HAUT_GRIMPEUR = 0;
+        int LIMIT_SWITCH_BAS_GRIMPEUR = 1;
     }
     public interface ANALOG {
     
@@ -66,7 +66,7 @@ public interface Constants {
 
     public interface SPEED {
         double FEEDER_SPEED = .2;
-        double LANCEUR_SPEED = .7;
+        double LANCEUR_SPEED = .4;
         double GOBEUR_SPEED = .6;
     }
 
