@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.subsystems.Drivetrain;
@@ -61,8 +62,9 @@ public class AutonomousCommands {
                                             new AvancerPiedsCommand(drivetrain, 9),
                                             new ActiverDesactiverLanceurCommand(lanceur),
                                             new WaitCommand(1),
+                                            new ParallelRaceGroup(
                                             new FeederTournerHautBasCommand(feeder, -1),
-                                            new WaitCommand(3),
+                                            new WaitCommand(3)),
                                             new ActiverDesactiverLanceurCommand(lanceur),
                                             new TournerGyroCommand(drivetrain, 121.78),
                                             new AvancerPiedsCommand(drivetrain, 10.59),
@@ -79,8 +81,9 @@ public class AutonomousCommands {
                                                                         new AvancerPiedsCommand(drivetrain, 9),
                                                                         new ActiverDesactiverLanceurCommand(lanceur),
                                                                         new WaitCommand(1),
+                                                                        new ParallelRaceGroup(
                                                                         new FeederTournerHautBasCommand(feeder, -1),
-                                                                        new WaitCommand(3),
+                                                                        new WaitCommand(3)),
                                                                         new ActiverDesactiverLanceurCommand(lanceur));
         SequentialCommandGroup seTasser = new SequentialCommandGroup();
         if(startPosition == StartPosition.gauche){
