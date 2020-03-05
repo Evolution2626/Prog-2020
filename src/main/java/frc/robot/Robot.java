@@ -39,7 +39,8 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
     camera.setConnectionStrategy(VideoSource.ConnectionStrategy.kKeepOpen);
-    camera.setResolution(720, 480);
+    camera.setResolution(640, 480);
+    camera.setFPS(30);
     m_robotContainer = new RobotContainer();
   }
 

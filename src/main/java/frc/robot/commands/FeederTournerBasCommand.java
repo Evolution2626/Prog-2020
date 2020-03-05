@@ -31,7 +31,7 @@ public class FeederTournerBasCommand extends CommandBase {
   public void execute() {
     feeder.setSpeedHaut(0);
     if (feeder.getAcvtivateBas()) {
-      feeder.setSpeedBas(-.65);
+      feeder.setSpeedBas(-.5);
     }else{
       feeder.setSpeedBas(0);
     }

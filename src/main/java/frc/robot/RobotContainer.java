@@ -102,8 +102,8 @@ public class RobotContainer {
     new JoystickButton(coDriverController, Button.kA.value).whenPressed(new ActiverDesactiverLanceurCommand(lanceur));
     new DigitalInputButton(feeder.getCapteurRaw(0)).whenPressed(new FeederMonterUnBallonCommand(feeder));
     new JoystickButton(coDriverController, Button.kB.value).whenPressed(new MonterGobeurCommand(gobeur));
-    new JoystickButton(driverController, Button.kA.value).whileHeld(new MonterGrimpeurCommand(grimpeur));
-    new JoystickButton(driverController, Button.kY.value).whileHeld(new DescendreGrimpeurCommand(grimpeur));
+    new JoystickButton(driverController, Button.kY.value).whileHeld(new MonterGrimpeurCommand(grimpeur));
+    new JoystickButton(driverController, Button.kA.value).whileHeld(new DescendreGrimpeurCommand(grimpeur));
     new JoystickButton(driverController, Button.kB.value).whileHeld(new MonterWinchGrimpeurCommand(grimpeur));
     new JoystickButton(driverController, Button.kX.value).whileHeld(new DescendreWinchCommand(grimpeur));
     new JoystickButton(coDriverController, Button.kStart.value).whenPressed(new ActivateDeactivateFeederBasCommand(feeder));

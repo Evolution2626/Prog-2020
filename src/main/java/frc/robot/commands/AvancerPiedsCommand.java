@@ -56,7 +56,7 @@ public class AvancerPiedsCommand extends CommandBase {
     double speedDroit = PID(drivetrain.getRightEncodersPosition()*Constants.ROBOT_CHARACTERIZATION.encoderConstantPieds, .2);
     double speedGauche = PID(drivetrain.getLeftEncodersPosition()*Constants.ROBOT_CHARACTERIZATION.encoderConstantPieds, .2);
     doubleCoerce.setSpeed(speedGauche, speedDroit, .5);
-    drivetrain.driveTank(doubleCoerce.getSpeedLeft(), doubleCoerce.getSpeedRight());
+    drivetrain.driveTank(Range.minCoerce(0.1, doubleCoerce.getSpeedLeft()), Range.minCoerce(0.1, doubleCoerce.getSpeedRight()));
   }
 
   // Called once the command ends or is interrupted.
