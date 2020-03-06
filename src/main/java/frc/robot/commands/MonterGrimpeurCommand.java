@@ -31,7 +31,7 @@ public class MonterGrimpeurCommand extends CommandBase {
   @Override
   public void execute() {
     if(!grimpeur.getLimitSwitchHautValue()){
-      grimpeur.setMonteurSpeed(-.25);
+      grimpeur.setMonteurSpeed(.4);
     } else {
       grimpeur.setMonteurSpeed(0);
     }

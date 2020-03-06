@@ -78,9 +78,11 @@ public class RobotContainer {
     chooserStart.addOption("Straight Start", StartPosition.centre);
     chooserStart.addOption("Right Start", StartPosition.droite);
     chooserStart.addOption("Left Start", StartPosition.gauche);
+    chooserStart.addOption("Avancer", StartPosition.avancer);
     chooserEnd.addOption("Ballon End", EndPosition.ballon);
     chooserEnd.addOption("Right End", EndPosition.droite);
     chooserEnd.addOption("Left End", EndPosition.gauche);
+    chooserEnd.addOption("Stay", EndPosition.stay);
     SmartDashboard.putData("Auto Start", chooserStart);
     SmartDashboard.putData("Auto End", chooserEnd);
     drivetrain.setDefaultCommand(new DrivetrainDriveCommand(drivetrain, driverController));

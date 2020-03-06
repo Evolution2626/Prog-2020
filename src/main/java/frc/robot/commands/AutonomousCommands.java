@@ -20,8 +20,8 @@ import frc.robot.subsystems.Lanceur;
  * Add your docs here.
  */
 public class AutonomousCommands {
-    public static enum StartPosition {centre, droite, gauche}
-    public static enum EndPosition {ballon, droite, gauche}
+    public static enum StartPosition {centre, droite, gauche, avancer}
+    public static enum EndPosition {ballon, droite, gauche, stay}
     
     public static Command autonomousTestCommand(Drivetrain drivetrain, Lanceur lanceur, Feeder feeder){
         return new SequentialCommandGroup(new AvancerPiedsCommand(drivetrain, 3.5),
@@ -60,12 +60,12 @@ public class AutonomousCommands {
     public static Command avanceDroitAndShoot(Drivetrain drivetrain, Lanceur lanceur, Feeder feeder, Gobeur gobeur){
         return new SequentialCommandGroup(  new MonterGobeurCommand(gobeur),
                                             new AvancerPiedsCommand(drivetrain, 9),
-                                            new ActiverDesactiverLanceurCommand(lanceur),
+                                            new SetLanceurActiveCommand(lanceur, true),
                                             new WaitCommand(1),
                                             new ParallelRaceGroup(
                                             new FeederTournerHautBasCommand(feeder, -1),
                                             new WaitCommand(3)),
-                                            new ActiverDesactiverLanceurCommand(lanceur),
+                                            new SetLanceurActiveCommand(lanceur, false),
                                             new TournerGyroCommand(drivetrain, 121.78),
                                             new AvancerPiedsCommand(drivetrain, 10.59),
                                             new TournerGyroCommand(drivetrain, 58.2),
@@ -77,18 +77,22 @@ public class AutonomousCommands {
 
     public static Command autonomous(Drivetrain drivetrain, Lanceur lanceur, Feeder feeder, Gobeur gobeur, StartPosition startPosition, EndPosition endPosition){
         SequentialCommandGroup seRendre = new SequentialCommandGroup();
-        SequentialCommandGroup allerTirer = new SequentialCommandGroup( new MonterGobeurCommand(gobeur),
+        SequentialCommandGroup allerTirer = new SequentialCommandGroup( new SetLanceurActiveCommand(lanceur, true),
                                                                         new AvancerPiedsCommand(drivetrain, 9),
-                                                                        new ActiverDesactiverLanceurCommand(lanceur),
-                                                                        new WaitCommand(1),
                                                                         new ParallelRaceGroup(
                                                                         new FeederTournerHautBasCommand(feeder, -1),
-                                                                        new WaitCommand(3)),
-                                                                        new ActiverDesactiverLanceurCommand(lanceur));
+                                                                        new WaitCommand(4)),
+                                                                        new SetLanceurActiveCommand(lanceur, false));
         SequentialCommandGroup seTasser = new SequentialCommandGroup();
         if(startPosition == StartPosition.gauche){
             seRendre = new SequentialCommandGroup(  new AvancerPiedsCommand(drivetrain, 5.58),
                                                     new TournerGyroCommand(drivetrain, -90));
+        }
+        if(startPosition == StartPosition.avancer){
+            seRendre = new SequentialCommandGroup(new AvancerPiedsCommand(drivetrain, 4));
+        }
+        if(startPosition == StartPosition.avancer){
+            allerTirer = new SequentialCommandGroup();
         }
         if(startPosition == StartPosition.droite){
             seRendre = new SequentialCommandGroup(  new AvancerPiedsCommand(drivetrain, 5.58),
@@ -108,6 +112,9 @@ public class AutonomousCommands {
         if(endPosition == EndPosition.gauche){
             seTasser = new SequentialCommandGroup(  new TournerGyroCommand(drivetrain, -90),
                                                     new AvancerPiedsCommand(drivetrain, 4.17));
+        }
+        if(endPosition == EndPosition.stay){
+            seTasser = new SequentialCommandGroup();
         }
         return new SequentialCommandGroup(seRendre, allerTirer, seTasser);
     }
