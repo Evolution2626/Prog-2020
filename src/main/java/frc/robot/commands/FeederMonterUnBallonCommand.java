@@ -41,7 +41,7 @@ public class FeederMonterUnBallonCommand extends CommandBase {
         feeder.setSpeedHaut(0);
         stop = true;
       }else{
-        feeder.setSpeedHaut(-.4);
+        feeder.setSpeedHaut(-.5);
         etape = 2;
       }
     }else if (etape == 2) {
@@ -54,7 +54,7 @@ public class FeederMonterUnBallonCommand extends CommandBase {
       if (feeder.getCapteurValue(0) && feeder.getCapteurValue(1)){
         feeder.setSpeedBas(0);
       }else {
-        feeder.setSpeedBas(-.65);
+        feeder.setSpeedBas(-8);
       }
 
       if (!feeder.getCapteurValue(0) && feeder.getCapteurValue(1)){

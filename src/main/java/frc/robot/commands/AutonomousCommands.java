@@ -77,12 +77,21 @@ public class AutonomousCommands {
 
     public static Command autonomous(Drivetrain drivetrain, Lanceur lanceur, Feeder feeder, Gobeur gobeur, StartPosition startPosition, EndPosition endPosition){
         SequentialCommandGroup seRendre = new SequentialCommandGroup();
-        SequentialCommandGroup allerTirer = new SequentialCommandGroup( new SetLanceurActiveCommand(lanceur, true),
-                                                                        new AvancerPiedsCommand(drivetrain, 9),
+        SequentialCommandGroup allerTirer = new SequentialCommandGroup( new ActiverDesactiverLanceurCommand(lanceur),
                                                                         new ParallelRaceGroup(
-                                                                        new FeederTournerHautBasCommand(feeder, -1),
-                                                                        new WaitCommand(4)),
-                                                                        new SetLanceurActiveCommand(lanceur, false));
+                                                                            new LanceurCommand(lanceur),
+                                                                            new SequentialCommandGroup(
+                                                                                new AvancerPiedsCommand(drivetrain, 9),
+                                                                                new ParallelRaceGroup(
+                                                                                new FeederTournerHautBasCommand(feeder, -1),
+                                                                                new WaitCommand(4))
+                                                                            )
+                                                                        ),
+                                                                        new ActiverDesactiverLanceurCommand(lanceur),
+                                                                        new ParallelRaceGroup(
+                                                                            new LanceurCommand(lanceur),
+                                                                            new WaitCommand(0.2)
+                                                                        ));
         SequentialCommandGroup seTasser = new SequentialCommandGroup();
         if(startPosition == StartPosition.gauche){
             seRendre = new SequentialCommandGroup(  new AvancerPiedsCommand(drivetrain, 5.58),

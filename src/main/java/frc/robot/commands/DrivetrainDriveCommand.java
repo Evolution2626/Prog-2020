@@ -11,7 +11,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.RobotState;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Drivetrain;
@@ -46,8 +46,8 @@ public class DrivetrainDriveCommand extends CommandBase {
       double speedGauche = -controller.getRawAxis(Constants.AXES.AXES_GAUCHE);
       speedGauche = Range.threshold(.1, speedGauche);
       speedGauche = Math.pow(speedGauche, 3);
-      if (controller.getBumper(Hand.kLeft)) {
-        drivetrain.driveTank(speedGauche * .5, speedDroit * .5);
+      if (controller.getRawButton(Button.kBumperLeft.value)) {
+        drivetrain.driveTank(speedGauche * .3, speedDroit * .3);
       }else {
         drivetrain.driveTank(speedGauche, speedDroit);
         

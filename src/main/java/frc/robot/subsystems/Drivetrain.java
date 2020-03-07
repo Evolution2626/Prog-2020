@@ -48,10 +48,10 @@ public class Drivetrain extends SubsystemBase {
     arriereDroit.setIdleMode(IdleMode.kBrake);
     arriereGauche.setIdleMode(IdleMode.kBrake);
 
-    avantDroit.setClosedLoopRampRate(2);
-    avantGauche.setClosedLoopRampRate(2);
-    arriereDroit.setClosedLoopRampRate(2);
-    arriereGauche.setClosedLoopRampRate(2);
+    avantDroit.setClosedLoopRampRate(500);
+    avantGauche.setClosedLoopRampRate(500);
+    arriereDroit.setClosedLoopRampRate(500);
+    arriereGauche.setClosedLoopRampRate(500);
 
     avantDroit.setInverted(true);
     avantGauche.setInverted(false);
