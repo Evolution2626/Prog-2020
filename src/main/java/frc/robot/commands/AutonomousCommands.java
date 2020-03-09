@@ -114,6 +114,7 @@ public class AutonomousCommands {
                                                     new TournerGyroCommand(drivetrain, 58.2),
                                                     new AvancerPiedsCommand(drivetrain, 10.22));
         }
+        
         if(endPosition == EndPosition.droite){
             seTasser = new SequentialCommandGroup(  new TournerGyroCommand(drivetrain, 90),
                                                     new AvancerPiedsCommand(drivetrain, 5.58));

@@ -67,7 +67,7 @@ public class Drivetrain extends SubsystemBase {
     avantGauche.follow(arriereGauche);
 
 
-    setAllCurrentLimit(30, 25);
+    setAllCurrentLimit(25, 20);
 
     avantDroit.getPIDController().setP(1);
     arriereDroit.getPIDController().setP(1);

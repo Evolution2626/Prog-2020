@@ -30,11 +30,7 @@ public class DescendreGrimpeurCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(!grimpeur.getLimitSwitchBasValue()){
-      grimpeur.setMonteurSpeed(-.4);
-    } else {
-      grimpeur.setMonteurSpeed(0);
-    }
+    grimpeur.setMonteurSpeed(-.4);
 
   }
 
