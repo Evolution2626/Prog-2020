@@ -46,7 +46,7 @@ public class DrivetrainDriveCommand extends CommandBase {
       double speedGauche = -controller.getRawAxis(Constants.AXES.AXES_GAUCHE);
       speedGauche = Range.threshold(.1, speedGauche);
       speedGauche = Math.pow(speedGauche, 3);
-      if (controller.getRawButton(Button.kBumperLeft.value)) {
+      if (!controller.getRawButton(Button.kBumperLeft.value)) {
         drivetrain.driveTank(speedGauche * .3, speedDroit * .3);
       }else {
         drivetrain.driveTank(speedGauche, speedDroit);
